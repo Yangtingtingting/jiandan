@@ -1,0 +1,116 @@
+<!--pages/position_detail/position_detail.wxml-->
+<view class="wrap">
+    <view class="posibox" wx:for="{{posilist}}" wx:key="index">
+        <view class="topcontent">
+            <view class="pos_head">
+                <view class="pos_headtop">
+                    <view class="pos_title">
+                        {{item.title}}
+                    </view>
+                    <view class="pos_price">
+                        {{item.price}}
+                    </view>
+                </view>
+                <view class="pos_msg">
+                    <view>{{item.adress}}</view>
+                    <view>{{item.platform}}</view>
+                    <view>{{item.persnum}}</view>
+                </view>
+            </view>
+            <view class="pos_intro">
+                <view class="adresstitle">职位介绍</view>
+                <view class="intro_list">
+                    {{item.posintro}}
+                </view>
+            </view>
+            <view class="pos_intro">
+                <view class="adresstitle">工作要求</view>
+                <view class="intro_list">
+                    <view wx:for="{{item.workrequire}}" wx:for-item="itemName" wx:key="index">{{itemName}}</view>
+                </view>
+            </view>
+            <view class="pos_time">
+                <view class="adresstitle">工作时间</view>
+                <view class="work_time">
+                    {{item.worktime}}
+                </view>
+            </view>
+            <view>
+                <view class="adresstitle">薪资结构</view>
+                <view class="intro_list bornone">
+                    <view wx:for="{{item.pricestructure}}" wx:for-item="itemName" wx:key="index">{{itemName}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="intro_place">
+            <view class="adresstitle">工作地点</view>
+            <view class="placetitle">
+                {{item.workplace}}
+            </view>
+            <view class="baiodumap">
+                <map id="myMap" style="width: 100%; height: 370rpx;" latitude="{{item.latitude}}"
+                    longitude="{{item.longitude}}" bindmarkertap="markertap" bindcallouttap="callouttap"
+                    bindlabeltap="labeltap" markers="{{item.markers}}" show-location="true" show-compass="true"
+                    scale="16">
+                    <cover-view slot="callout">
+                        <block wx:for="{{item.customCalloutMarkerIds}}" wx:key="*this">
+                            <cover-view class="customCallout" marker-id="{{item}}">
+                                <cover-image class="icon" src="/image/voice.png"></cover-image>
+                            </cover-view>
+                        </block>
+                    </cover-view>
+                </map>
+            </view>
+        </view>
+        <view class="pos_btngroup">
+            <view>（{{item.persnum}}）</view>
+            <view bindtap="oncesign">立即报名</view>
+        </view>
+        <view class="oncedialog">
+            <van-popup show="{{ isconfirm }}" bind:close="ageClose" position="bottom">
+                <view class="diabox">
+                    <view class="diacontent">
+                        <view class="diatop">
+                            <view class="diatitle">
+                                确定工作要求
+                            </view>
+                            <view class="diaage">
+                                <view>17岁以上</view>
+                            </view>
+                        </view>
+                        <view class="diacneter">
+                            <view class="diatitle">
+                                选择上班时间<span>（12.17~12.20）</span>
+                            </view>
+                            <view class="radiogroup">
+                                <van-radio-group value="{{ partradio }}" bind:change="partChang">
+                                    <van-radio name="1" label-position="left" checked-color="#FFCF08">白班 09：00~17:00</van-radio>
+                                    <van-radio name="2" label-position="left" checked-color="#FFCF08">夜班 18：00~05:00</van-radio>
+                                </van-radio-group>
+                            </view>
+                        </view>
+                        <view class="diabot pb20">
+                            <view class="diatitle">
+                                确定工作地点
+                            </view>
+                            <view class="radiogroup">
+                                <van-radio-group value="{{ adressradio }}" bind:change="adressChang">
+                                    <van-radio label-class="labaltext" label-position="left" checked-color="#FFCF08"
+                                        name="1">杭州下城杭州嘉里中心</van-radio>
+                                    <van-radio label-class="labaltext" label-position="left" checked-color="#FFCF08"
+                                        name="2">杭州上城湖银泰in77C区</van-radio>
+                                    <van-radio label-class="labaltext" label-position="left" checked-color="#FFCF08"
+                                        name="3">杭州余杭金地广场</van-radio>
+                                </van-radio-group>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="btngroup">
+                        <view bindtap="diacancel">取消</view>
+                        <view bindtap="deliveryres">投简历</view>
+                    </view>
+                </view>
+            </van-popup>
+        </view>
+    </view>
+</view>

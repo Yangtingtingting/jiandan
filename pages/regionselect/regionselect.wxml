@@ -1,0 +1,14 @@
+<!--pages/regionselect/regionselect.wxml-->
+<view class="wrap">
+    <van-tree-select
+  items="{{ areaitems }}"
+  main-active-index="{{ mainActiveIndex }}"
+  active-id="{{ activeId }}"
+  bind:click-nav="onClickNav"
+  bind:click-item="onClickItem"
+  main-item-class="leftsheng"
+  main-active-class="leftactive"
+  content-item-class="leftcity"
+  height="100%"
+/>
+</view>

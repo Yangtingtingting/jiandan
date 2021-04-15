@@ -1,0 +1,119 @@
+<!--pages/my_resume/my_resume.wxml-->
+<view class="wrap">
+    <view class="res_box">
+        <view class="basis_msg">
+            <view class="basis_tiele">
+                基础信息<span>*</span>
+            </view>
+            <view>
+                <view>
+                    <van-cell-group>
+                        <van-field value="{{ name }}" label="姓名" input-align="right" placeholder="请输入用户名"
+                            border="{{ true }}" custom-style="names" bind:change="nameChange" label-class="textword"
+                            input-class="inputsty" />
+                    </van-cell-group>
+                    <!-- 选择性别 -->
+                    <view>
+                        <van-cell title="性别" is-link bind:click="agePopup" value="男" value-class="rightword" />
+
+                        <van-popup show="{{ sexshow }}" bind:close="onClose" position="bottom">
+                            <view>
+                                <van-picker columns="{{ columns }}" bind:change="onChange" visible-item-count="4"
+                                    default-index="{{ 1 }}" title="" columns="{{ columns }}" />
+                                <view class="btngroup">
+                                    <view class="sexcancel" bindtap="sexcancel">取消</view>
+                                    <view class="sexconfirm" bindtap="sexconfirm">确定</view>
+                                </view>
+                            </view>
+                        </van-popup>
+                    </view>
+                    <!-- 年龄选择 -->
+                    <view>
+                        <van-cell title="年龄选择" is-link bind:click="showPopup" value-class="rightword" value="{{agelist[0]}}" />
+                        <van-popup show="{{ ageshow }}" bind:close="ageClose" position="bottom">
+                            <view>
+                                <van-picker columns="{{ columns }}" bind:change="onChange" default-index="{{ 1 }}"
+                                    visible-item-count="5" title="" columns="{{ agelist }}" />
+                                <view class="btngroup">
+                                    <view class="sexcancel" bindtap="agecancel">取消</view>
+                                    <view class="sexconfirm" bindtap="ageconfirm">确定</view>
+                                </view>
+                            </view>
+                        </van-popup>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{ phonenumber }}" label="联系方式" input-align="right" placeholder="请输入手机号码"
+                            border="{{ true }}" custom-style="names" bind:change="phoneChange" label-class="textword"
+                            input-class="inputsty" />
+                    </van-cell-group>
+                    <van-cell-group>
+                        <van-field value="{{ phonenumber }}" label="备用联系方式" input-align="right" placeholder="备用联系方式"
+                            border="{{false}}" custom-style="names" bind:change="byChange" label-class="textword"
+                            input-class="inputsty" />
+                    </van-cell-group>
+                </view>
+            </view>
+        </view>
+        <view class="option_msg">
+            <view class="basis_tiele">
+                非必填项<span>*</span>
+            </view>
+            <view>
+                <view>
+                    <van-cell-group>
+                        <van-field value="{{ stature }}" label="身高" input-align="right" placeholder="请输入身高"
+                            border="{{ true }}" custom-style="names" bind:change="statureChange" label-class="textword"
+                            input-class="inputsty" />
+                    </van-cell-group>
+                    <van-cell-group>
+                        <van-field value="{{ perweight }}" label="体重" input-align="right" placeholder="请输入体重"
+                            border="{{ true }}" custom-style="names" bind:change="weightChange" label-class="textword"
+                            input-class="inputsty" />
+                    </van-cell-group>
+                    <!-- 身体状况 -->
+                    <view>
+                        <van-cell title="身体状况" is-link bind:click="bodyPopup" value="{{bodylist[0]}}" value-class="rightword" />
+                        <van-popup show="{{ bodyshow }}" bind:close="ageClose" position="bottom">
+                            <view>
+                                <van-picker columns="{{ columns }}" bind:change="onChange" visible-item-count="4"
+                                    default-index="{{ 1 }}" title="性别选择" columns="{{ bodylist }}" />
+                                <view class="btngroup">
+                                    <view class="sexcancel" bindtap="bodycancel">取消</view>
+                                    <view class="sexconfirm" bindtap="bodyconfirm">确定</view>
+                                </view>
+                            </view>
+                        </van-popup>
+                    </view>
+                    <!-- 选择疾病史 -->
+                    <view>
+                        <van-cell title="是否疾病史" is-link bind:click="diseasePopup" value="{{diseasevalue}}" value-class="rightword" />
+
+                        <van-popup show="{{ diseaseshow }}" bind:close="diseaseClose" position="bottom">
+                            <view>
+                                <van-picker columns="{{ columns }}" bind:change="diseaseChange" visible-item-count="4"
+                                    item-height="40" default-index="{{ 0 }}" title="" columns="{{ diseaselist }}" />
+                                <view class="btngroup">
+                                    <view class="sexcancel" bindtap="diseasecancel">取消</view>
+                                    <view class="sexconfirm" bindtap="diseaseconfirm">确定</view>
+                                </view>
+                            </view>
+                        </van-popup>
+                    </view>
+                    <view wx:if="{{ishistory}}" class="diseasetextarea">
+                        <van-cell-group>
+                            <van-field value="{{ sickhis }}" type="textarea" autosize=" minHeight: 100"
+                                custom-style="background:#f8f8f8;border-radius:8rpx;width:100%;height:200rpx;padding-left:100rpx;flex-wrap:wrpa"
+                                placeholder="请输入病史" />
+                        </van-cell-group>
+                    </view>
+                    <view class="promptword">
+                        您完善的信息可能会被商家看到，给您推荐合适的工作岗位。
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="btnsign">
+            保存
+        </view>
+    </view>
+</view>

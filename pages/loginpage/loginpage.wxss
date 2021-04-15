@@ -1,0 +1,92 @@
+/* pages/loginpage/loginpage.wxss */
+.loghead {
+    width: 100%;
+    background-color: #FFCF08;
+    border-radius: 0px 0px 40rpx 40rpx;
+    font-size: 48rpx;
+    font-weight: bold;
+    line-height: 66rpx;
+    color: #000000;
+    padding-top: 192rpx;
+    padding-left: 96rpx;
+    padding-bottom: 48rpx;
+}
+
+.phoneclass {
+    font-size: 24rpx;
+    line-height: 80rpx;
+    color: #AAAAAA;
+}
+
+.logform {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 84rpx;
+}
+.phonenum{
+    line-height: 72rpx;
+}
+.phoneinput input{
+    height: 80rpx;
+    border-bottom: 1px solid #AAAAAA;
+}
+.mt18{
+    margin-top: 36rpx;
+}
+.markenum{
+    line-height: 72rpx;
+}
+.markinput input{
+    height: 80rpx;
+    border-bottom: 1px solid #AAAAAA;
+}
+.markclass {
+    font-size: 12px;
+    line-height: 34px;
+    color: #AAAAAA;
+}
+.marknum{
+    display: flex;
+    justify-content: space-between;
+}
+.marknum input{
+    width: 324rpx;
+}
+.getnum{
+    line-height: 62rpx;
+    background: #FFCF08;
+    border-radius: 8px;
+    color: #000000;
+    font-size: 24rpx;
+    padding: 14rpx 36rpx;
+}
+.getsign{
+    background: #EEEEEE;
+    border-radius: 44rpx;
+    line-height: 80rpx;
+    font-size: 36rpx;
+    color: #AAAAAA;
+    text-align: center;
+    width: 558rpx;
+    margin: 0 auto;
+    margin-top: 88rpx;
+}
+.markerro{
+    line-height: 28rpx;
+    color: #FF4E36;
+    font-size: 20rpx;
+}
+.phoneerro{
+    line-height: 28rpx;
+    color: #FF4E36;
+    font-size: 20rpx;
+    margin-top: 3px;
+}
+.countdown{
+    line-height: 62rpx;
+    background: #EEEEEE;
+    border-radius: 8px;
+    color: #000000;
+    font-size: 12px;
+    padding: 14rpx 36rpx;
+}

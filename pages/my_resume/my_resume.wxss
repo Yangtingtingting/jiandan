@@ -1,0 +1,105 @@
+/* pages/my_resume/my_resume.wxss */
+.wrap{
+    width: 100%;
+}
+page{
+    background: #f5f5f5;
+}
+.basis_msg{
+    padding: 24rpx 24rpx 0px;
+    background: #fff;
+    position: relative;
+}
+.basis_tiele{
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 50rpx;
+    color: #111111;
+}
+.basis_tiele span{
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 50rpx;
+    color: #FF4E36;
+}
+.van-cell{
+    padding-left: 0px!important;
+}
+.van-cell::after{
+   left: -1px!important; 
+}
+.textword{
+    color: #555555!important;
+}
+.inputsty{
+    color: #111111!important;
+}
+.sexcancel{
+    /* position: relative; */
+    width: 176rpx;
+    line-height: 80rpx;
+    background: #eeeeee;
+    border-radius: 8rpx;
+    text-align: center;
+    bottom: 64rpx;
+    left: 120rpx;
+    color: #111111!important;
+    margin-top: 40rpx;
+}
+.sexconfirm{
+    /* position: absolute; */
+    width: 176rpx;
+    line-height: 80rpx;
+    background: #FFCF08;
+    border-radius: 8rpx;
+    text-align: center;
+    bottom: 64rpx;
+    left: 392rpx;
+    color: #111111!important;
+    margin-top: 40rpx;
+}
+.van-picker__title{
+    margin: 0 auto;
+}
+.option_msg{
+    padding:24rpx 24rpx 0rpx;
+    background: #fff;
+    margin-top: 24rpx;
+    box-sizing: border-box;
+}
+.van-cell__value{
+    padding-left: 24rpx;
+}
+.promptword{
+    font-size: 24rpx;
+    line-height: 68rpx;
+    color: #AAAAAA;
+}
+.promptword{
+    font-size: 24rpx;
+    line-height: 68rpx;
+    color: #AAAAAA;
+}
+.btnsign{
+    width: 95vw;
+    margin: 0 auto;
+    line-height: 88rpx;
+    border-radius: 44rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #111111;
+    background: #FFCF08;
+    text-align: center;
+    margin-top: 48rpx;
+    margin-bottom: 48rpx;
+}
+.btngroup{
+    display: flex;
+    justify-content: space-between;
+    width: 60vw;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.rightword{
+    color: #111!important;
+}

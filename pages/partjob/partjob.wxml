@@ -1,0 +1,62 @@
+<!--pages/partjob/partjob.wxml-->
+<view class="wrap">
+    <view class="nacsearch">
+        <view class="navtext">
+            {{citys}}
+        </view>
+        <view class="searchinput">
+            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" />
+        </view>
+    </view>
+    <view class="contentwrap">
+        <view class="navimg">
+            <view class="partimg">
+                <image mode="aspectFit" src="../../images/ptj_icon_qbjz.png"></image>
+                <view class="parttext">
+                    全部兼职
+                </view>
+            </view>
+            <view class="partimg" bindtap="regionselect">
+                <image mode="aspectFit" src="../../images/ptj_icon_dqxz.png"></image>
+                <view class="parttext" >
+                    地区选择
+                </view>
+            </view>
+            <view class="partimg" bindtap="workselect">
+                <image mode="aspectFit" src="../../images/ptj_icon_hyxz.png"></image>
+                <view class="parttext">
+                    行业选择
+                </view>
+            </view>
+            <view class="partimg" bindtap="salaryselect">
+                <image mode="aspectFit" src="../../images/ptj_icon_xzxz.png"></image>
+                <view class="parttext">
+                    薪资选择
+                </view>
+            </view>
+        </view>
+        <view class="recommendpart">
+            <view class="parttitle">
+                推荐兼职
+            </view>
+            <view class="partlists" wx:for="{{partjoblist}}"  wx:key="index">
+                <view class="partitem">
+                    <view class="partitemtitle">
+                        {{item.title}}
+                        <span>{{item.salary}}</span>
+                    </view>
+                    <view class="partitemadress">
+                        {{item.parttime}}
+                        <span>{{item.partadress}}</span>
+                    </view>
+                    <view class="partitembtn">
+                        平台担保
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="readmore">
+            加载更多
+        </view>
+    </view>
+</view>

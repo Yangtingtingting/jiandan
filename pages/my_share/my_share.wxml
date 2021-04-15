@@ -1,0 +1,61 @@
+<!--pages/my_share/my_share.wxml-->
+<view class="wrap">
+    <view class="sharecode">
+        <view class="bgimg">
+            <image mode="aspectFill" src="../../images/img_yq.png"></image>
+        </view>
+        <view class="sharetitle">
+            <view>您的专属二维码</view>
+            <view class="mycode">我是二维码</view>
+            <view>您的专属二维码</view>
+        </view>
+    </view>
+    <view class="myinvited">
+        <view class="inv_title">
+            <image mode="aspectFill" src="../../images/img_wdyq.png"></image>
+        </view>
+        <view class="inv_content">
+            <view class="inconleft">
+                <view class="leimage">
+                    <image mode="aspectFill" src="../../images/icon_yqhy.png"></image>
+                </view>
+                <view class="letext">
+                    <view class="textpersom">8<span>元</span></view>
+                    <view class="textfriend">邀请好友</view>
+                </view>
+            </view>
+            <view class="inconleft">
+                <view class="leimage">
+                    <image mode="aspectFill" src="../../images/icon_yqhy.png"></image>
+                </view>
+                <view class="letext">
+                    <view class="textpersom">500<span>元</span></view>
+                    <view class="textfriend">邀请好友</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="myinlist">
+        <view class="listtitle">
+            <view>被邀人</view>
+            <view>兼职数</view>
+            <view>返利额</view>
+        </view>
+        <view class="myinbox">
+            <view class="myinitemm" wx:for="{{sharelist}}" wx:key="index">
+                <view>
+                    <span wx:if="{{index == 0}}" style="color:#E4630D;">{{index+1}}</span>
+                    <span wx:if="{{index == 1}}" style="color:#0D80E4;">{{index+1}}</span>
+                    <span wx:if="{{index == 2}}" style="color:#FFCF08;">{{index+1}}</span>
+                    <span wx:if="{{index > 2}}" style="color:#AAAAAA;">{{index+1}}</span>
+                    {{item.name}}
+                </view>
+                <view>{{item.partnum}}</view>
+                <view>{{item.fanlinum}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="btnshare">
+        <button>分享好友</button>
+    </view>
+</view>

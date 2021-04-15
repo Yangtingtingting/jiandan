@@ -1,0 +1,35 @@
+<!--pages/my_wallet/my_wallet.wxml-->
+<view class="wrap">
+    <view class="wal_head">
+        <view class="headcontent">
+            <view>总收入<span>{{incometol}}</span></view>
+            <view class="txinput">
+                <input type="text" placeholder-class="txplace" placeholder="请输入提现金额" bindinput="txprice" value="{{refvalue}}"/>
+            </view>
+            <view class="errword" wx:if="{{iserrowprd}}">
+                本月未兼职，无法进行提现
+            </view>
+            <view class="btngroup">
+                <button wx:if="{{btnshow}}" class="showbtn">立即提现</button>
+                <button wx:if="{{!btnshow}}" class="nonebtn">立即提现</button>
+            </view>
+        </view>
+    </view>
+    <view class="walletlist">
+        <view class="adresstitle">收入明细</view>
+        <view class="wallitem" wx:for="{{walllist}}" wx:key="index">
+            <view class="walletcontent">
+                <view class="wallleft">
+                    <view class="wallimgbox">
+                        <image mode="aspectFit" src="{{item.src}}"></image>
+                    </view>
+                    <view class="walltext">
+                        <view>{{item.title}}</view>
+                        <view>{{item.date}}</view>
+                    </view>
+                </view>
+                <view  class="wallright">{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+</view>

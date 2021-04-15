@@ -1,0 +1,8 @@
+<!--pages/salaryselect/salaryselect.wxml-->
+<view class="wrap">
+    <view class="salarybox">
+        <view class="salaryitem" wx:for="{{salaryintervallist}}" wx:key="index" data-intertype="{{item.type}}" bindtap="salarytap">
+            {{item.moneyinter}}
+        </view>
+    </view>
+</view>

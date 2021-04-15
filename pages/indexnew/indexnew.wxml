@@ -1,0 +1,49 @@
+<!--pages/indexnew/indexnew.wxml-->
+<view class="wrap">
+    <view class="nacsearch">
+        <view class="navtext" bindtap="goregion">
+            {{citys}}
+        </view>
+        <view class="searchinput">
+            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" />
+        </view>
+    </view>
+    <view class="contentbox">
+        <view class="swiperbox">
+            <view class="page-section page-section-spacing swiper swiperheight">
+                <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}} "
+                 interval="{{interval}}"
+                    duration="{{duration}}" circular="{{circular}}">
+                    <block wx:for="{{bannerlist}}" wx:key="index" wx:for-item="imgitem">
+                        <swiper-item class="bannerswiper">
+                            <image mode="aspectFit" src="{{imgitem.srcpath}}"></image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+        </view>
+        <view class="recommendpart">
+            <view class="parttitle">
+                推荐兼职
+            </view>
+            <view class="partlists" wx:for="{{partjoblist}}"  wx:key="index">
+                <view class="partitem" bindtap="positiondetail" data-posid="{{item.id}}">
+                    <view class="partitemtitle">
+                        {{item.title}}
+                        <span>{{item.salary}}</span>
+                    </view>
+                    <view class="partitemadress">
+                        {{item.parttime}}
+                        <span>{{item.partadress}}</span>
+                    </view>
+                    <view class="partitembtn">
+                        平台担保
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="readmore">
+            查看更多职位
+        </view>
+    </view>
+</view>

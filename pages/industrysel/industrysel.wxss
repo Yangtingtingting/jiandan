@@ -1,0 +1,26 @@
+/* pages/industrysel/industrysel.wxss */
+.wrap{
+    padding-bottom: 100rpx;
+}
+.ind_item{
+    display: flex;
+    flex-wrap: wrap;
+}
+.ind_items{
+    border: 1px solid #EEEEEE;
+    line-height: 76rpx;
+    width: 28.4vw;
+    text-align: center;
+    border-radius: 8rpx;
+    margin-left: 28rpx;
+    margin-top: 24rpx;
+    box-sizing: border-box;
+}
+.inde_title{
+    font-size: 32rpx;
+    line-height: 44rpx;
+    color: #AAAAAA;
+    padding-left: 24rpx;
+    box-sizing: border-box;
+    margin-top: 48rpx;
+}

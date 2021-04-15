@@ -1,0 +1,19 @@
+/* pages/salaryselect/salaryselect.wxss */
+.salarybox{
+    display: flex;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.salaryitem{
+    width: 208rpx;
+    font-size: 28rpx;
+    line-height: 76rpx;
+    color: #111111;
+    border:  1px solid #EEEEEE;
+    opacity: 1;
+    border-radius: 8rpx;
+    text-align: center;
+    margin-top: 24rpx;
+}

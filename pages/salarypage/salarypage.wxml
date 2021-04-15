@@ -1,0 +1,43 @@
+<!--pages/salarypage/salarypage.wxml-->
+<view class="wrap">
+    <view class="luckydraw">
+        <view class="drawimgbox">
+            <image mode="aspectFit" src="../../images/luckdraw_back.png"></image>
+        </view>
+        <view id="luckdraw_box">
+            <view id="luckdraw_back">
+                <image style='transform:rotate({{ change_angle}}deg)' mode="scaleToFill"
+                    src="/images/luckdraw_background.png"></image>
+            </view>
+            <view id="luckdraw_pointer" bindtap='luckDrawStart'>
+                <image mode="scaleToFill" src="/images/luckdraw_pointer.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="integralbox">
+        <view class="integraleft">
+            <image mode="aspectFit" src="../../images/img_monqd.png"></image>
+            <view class="integtext">总积分：44444</view>
+        </view>
+        <view class="integraright">
+            去体现
+        </view>
+    </view>
+    <view class="walletlist">
+        <view class="adresstitle">收入明细</view>
+        <view class="wallitem" wx:for="{{salarylist}}" wx:key="index">
+            <view class="walletcontent">
+                <view class="wallleft">
+                    <view class="wallimgbox">
+                        <image mode="aspectFit" src="{{item.src}}"></image>
+                    </view>
+                    <view class="walltext">
+                        <view>{{item.title}}</view>
+                        <view>{{item.date}}</view>
+                    </view>
+                </view>
+                <view class="wallright">{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+</view>

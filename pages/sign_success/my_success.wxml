@@ -1,0 +1,17 @@
+<!--pages/sign_success/my_success.wxml-->
+<view class="wrap">
+    <view class="suc_box">
+        <view class="imgbox">
+            <image mode="aspectFit" src="../../images/icon_cg.png"></image>
+        </view>
+        <view class="wordsuccess">
+            报名成功
+        </view>
+        <view class="wordprompt">
+            请您耐心等待商家与您联系
+        </view>
+        <view class="continuebtn">
+            <button bindtap="topartlist" id="continuebtn">继续报名</button>
+        </view>
+    </view>
+</view>

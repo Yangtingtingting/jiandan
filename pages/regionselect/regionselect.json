@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-tree-select": "@vant/weapp/tree-select/index"
+  },
+  "navigationBarTitleText": "地区选择",
+  "navigationBarTextStyle": "black"
+}

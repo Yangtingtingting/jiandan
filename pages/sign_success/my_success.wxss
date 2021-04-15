@@ -1,0 +1,42 @@
+/* pages/sign_success/my_success.wxss */
+.wrap{
+    width: 100%;
+}
+.suc_box{
+    width: 80vw;
+    margin: 100rpx auto;
+}
+.imgbox{
+    width: 128rpx;
+    height: 128rpx;
+    margin: 0 auto;
+}
+.imgbox image{
+    width: 128rpx;
+    height: 128rpx;
+}
+.wordsuccess{
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 98rpx;
+    color: #333333;
+    text-align: center;
+}
+.wordprompt{
+    font-size: 24rpx;
+    line-height: 34rpx;
+    color: #AAAAAA;
+    text-align: center;
+}
+.continuebtn {
+    margin-top: 48rpx;
+}
+.continuebtn button{
+    border: none;
+    background: #FFCF08;
+    border-radius: 46rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #111111;
+}
+.continuebtn button::after{ border: none; }

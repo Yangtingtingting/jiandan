@@ -1,0 +1,25 @@
+<!--pages/loginpage/loginpage.wxml-->
+<view class="loginwrap">
+    <view class="loghead">
+        欢迎使用兼蛋儿
+    </view>
+    <view class="logform">
+        <view class="phoneinput">
+            <view class="phonenum">手机号</view>
+            <input type="text" placeholder="请输入您的手机号" placeholder-class="phoneclass" bindinput="changephone"  style="border-bottom:{{phonebot}}"/>
+            <view class="phoneerro">手机号输入错误</view>
+        </view>
+        <view class="markinput mt18">
+            <view class="phonenum">验证码</view>
+            <view class="marknum">
+                <input type="text" placeholder="请输入您的验证码" placeholder-class="markclass" bindinput="changemark" style="border-bottom:{{markbot}}" />
+                <view wx:if="{{iscountdown}}" class="getnum" bindtap="vercode">获得验证码</view>
+                <view wx:if="{{!iscountdown}}" class="countdown" bindtap="vercode">{{countdowntime}}秒后获取</view>
+            </view>
+            <view class="markerro">手机号输入错误</view>
+        </view>
+        <view class="getsign" bindtap="getsignup">
+            立即报名
+        </view>
+    </view>
+</view>

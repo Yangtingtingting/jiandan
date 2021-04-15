@@ -1,0 +1,17 @@
+<!--pages/industrysel/industrysel.wxml-->
+<view class="wrap">
+    <view class="ind_box" wx:for="{{industlist}}" wx:key="index" wx:for-item="itemname">
+        <view class="inde_title">
+            {{itemname.title}}
+        </view>
+        <view class="ind_item">
+            <view class="ind_items" wx:for="{{itemname.worklist}}" wx:for-item="item"
+            data-id="{{item.id}}"
+            wx:key="index"
+            bindtap="selectwork"
+            >
+                {{item.worktype}}
+            </view>
+        </view>
+    </view>
+</view>

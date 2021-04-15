@@ -1,0 +1,61 @@
+{
+  "pages":[
+    "pages/lucklydraws/lucklydraws",
+    "pages/lucklydraw/lucklydraw",
+    "pages/salarypage/salarypage",
+    "pages/my_share/my_share",
+    "pages/mypersonal/mypersonal",
+    "pages/my_wallet/my_wallet",
+    "pages/position_detail/position_detail",
+    "pages/sign_success/my_success",
+    "pages/my_resume/my_resume",
+    "pages/partrecord_deatil/partrecord_deatil",
+    "pages/indexnew/indexnew",
+    "pages/partrecord/partrecord",
+    "pages/partjob/partjob",
+    "pages/industrysel/industrysel",
+    "pages/regionselect/regionselect",
+    "pages/salaryselect/salaryselect",
+    "pages/index/index",
+    "pages/loginpage/loginpage",
+    "pages/logins/logins"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#AAAAA",
+    "selectedColor": "#FFCF08",
+    "list": [
+      {
+        "selectedIconPath":"images/selected_tab_icon_home.png",
+        "iconPath": "images/normal_tab_icon_home.png",
+        "pagePath": "pages/indexnew/indexnew",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath":"images/selected_tab_icon_ptj.png",
+        "iconPath": "images/normal_tab_icon_ptj.png",
+        "pagePath": "pages/partjob/partjob",
+        "text": "兼职"
+      },
+      {
+        "selectedIconPath":"images/selected_tab_icon_salary.png",
+        "iconPath": "images/normal_tab_icon_salary.png",
+        "pagePath": "pages/salarypage/salarypage",
+        "text": "领薪"
+      },
+      {
+        "selectedIconPath":"images/selected_tab_icon_my.png",
+        "iconPath": "images/normal_tab_icon_my.png",
+        "pagePath": "pages/mypersonal/mypersonal",
+        "text": "我的"
+      }
+    ]
+  }
+  
+}

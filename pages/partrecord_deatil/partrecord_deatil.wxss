@@ -1,0 +1,86 @@
+/* pages/partrecord_deatil/partrecord_deatil.wxss */
+page{
+    background: #f5f5f5;
+}
+.recordbox{
+    padding-bottom: 100rpx;
+}
+.record_head{
+    background: rgb(255, 207, 8);
+    padding: 0px 24rpx 24rpx;
+}
+.record_status{
+    line-height: 114rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #111111;
+}
+.record_date{
+    font-size: 28rpx;
+    color: #111111;
+}
+.record_person{
+    padding: 0px 24rpx 20rpx;
+    background: #fff;
+    margin-bottom: 24rpx;
+}
+.record_position{
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 50px;
+    color: #111111;
+}
+.record_soure{
+    font-size: 32rpx;
+    line-height: 68rpx;
+    color: #111111;
+}
+.record_adress{
+    background: #fff;
+    padding: 0px 24rpx 32rpx;
+    margin-bottom: 24rpx;
+}
+.adresstitle{
+    position: relative;
+    font-size: 32rpx;
+    font-weight: bold;
+    line-height: 84rpx;
+    color: #111111;
+    padding-left: 20rpx;
+}
+.adresstitle::before{
+    position: absolute;
+    content: "";
+    width: 6rpx;
+    height: 24rpx;
+    left: 0px;
+    top:30rpx;
+    background: rgba(228, 142, 13, 1);
+}
+.adressdetail{
+    font-size: 28rpx;
+    line-height: 56rpx;
+    color: #555555;
+}
+.baiodumap{
+    width: 100%;
+    height: 370rpx;
+}
+.record_introduce{
+    background: #fff;
+    padding: 0px 24rpx 32rpx;
+    font-size: 28rpx;
+    line-height: 44rpx;
+    color: #555555;
+}
+.cnacelbtn{
+    line-height: 88rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #111111;
+    text-align: center;
+    margin: 40rpx 24rpx;
+    background: #FFCF08;
+    border-radius: 44rpx;
+    box-sizing: border-box;
+}
