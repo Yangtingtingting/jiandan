@@ -46,4 +46,17 @@
             查看更多职位
         </view>
     </view>
+    <van-dialog 
+        use-slot
+        title="您还未登录"
+        message="是否允许获取您的手机号进行登录操作？"
+        show="{{ showDialog }}"
+        confirm-button-color="#F18101" 
+        show-cancel-button
+        confirm-button-open-type="getPhoneNumber"
+        bind:getphonenumber="getPhoneNumber"  >  
+        <view class="no-login-user">
+            <image src="../../images/userIcon.png" mode="widthFix"></image> 
+        </view>
+    </van-dialog>
 </view>

@@ -1,0 +1,163 @@
+page {  
+  background: #fff;  
+}  
+.header{  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100rpx;  
+}  
+/* 转盘 */  
+.canvas-container {  
+  margin: 0 auto;  
+  position: relative;  
+  width: 593rpx;  
+  height: 593rpx;  
+  border-radius: 50%;  
+  /* box-shadow: 0 10rpx 30rpx #333, 0 0 10rpx #000;   */
+    /* border: 10rpx solid #A83FDB;   */
+}  
+.canvas-content {  
+  position: absolute;  
+  left: 0;  
+  top: 0;  
+  z-index: 1;  
+  display: block;  
+  width: 588rpx;  
+  height:588rpx;  
+  border-radius: inherit;  
+  background-clip: padding-box;  
+  /* background-color: #ffcb3f; */  
+}  
+.canvas-element {  
+  position: relative;  
+  z-index: 1;  
+  width: inherit;  
+  height: inherit;  
+  border-radius: 50%;  
+}  
+.canvas-list {  
+  position: absolute;  
+  left: 0;  
+  top: 0;  
+  width: inherit;  
+  height: inherit;  
+  z-index: 9999;  
+}  
+.canvas-item {  
+  position: absolute;  
+  left: 0;  
+  top: 0;  
+  width: 100%;  
+  height: 100%;  
+  color: #e4370e;  
+  font-weight: bold;  
+  text-shadow: 0 1rpx 1rpx rgba(255, 255, 255, 0.6);  
+}  
+/* .canvas-item:nth-child(2n){  
+  background: purple;
+}  */
+.canvas-item-text {  
+  position: relative;  
+  display: block;  
+  padding-top: 92rpx;  
+  margin: 0 auto;  
+  text-align: center;  
+  -webkit-transform-origin: 50% 300rpx;  
+  transform-origin: 50% 300rpx;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+}  
+.canvas-item-text text{  
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FF4E36;
+}  
+.canvas-item-text-img{  
+    width:176rpx;  
+    height:176rpx;  
+    padding-top:10rpx;  
+}  
+
+/* 分隔线 */  
+.canvas-line {  
+  position: absolute;  
+  left: 0;  
+  top: 0;  
+  width: inherit;  
+  height: inherit;  
+  z-index: 99;  
+}  
+.canvas-litem {  
+  position: absolute;  
+  left: 300rpx;  
+  top: 0;  
+  width: 3rpx;  
+  height: 300rpx;  
+  /* background-color: rgba(228, 55, 14, 0.4);   */
+  overflow: hidden;  
+  -webkit-transform-origin: 50% 300rpx;  
+  transform-origin: 50% 300rpx;  
+}  
+
+/**  
+* 抽奖按钮  
+*/  
+.canvas-btn {  
+  position: absolute;  
+  left: 203rpx;  
+  top: 184rpx;  
+  z-index: 400;  
+  /* width: 80rpx;  
+  height: 80rpx;   */
+  /* border-radius: 50%;   */
+  color: #f4e9cc;  
+  /* background-color: #e44025;   */
+  line-height: 80rpx;  
+  text-align: center;  
+  font-size: 26rpx;  
+  /* text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);   */
+  /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);   */
+  text-decoration: none;  
+}  
+/* .canvas-btn::after {  
+  position: absolute;  
+  display: block;  
+  content: ' ';  
+  left: 12rpx;  
+  top: -44rpx;  
+  width: 0;  
+  height: 0;  
+  overflow: hidden;  
+  border-width:30rpx;  
+  border-style: solid;  
+  border-color: transparent;  
+  border-bottom-color: #e44025;  
+}   */
+/* 禁止点击 */
+.canvas-btn.disabled {  
+  pointer-events: none;  
+  /* background: #b07a7b;   */
+  color: #ccc;  
+}  
+.canvas-btn.disabled::after {  
+  /* border-bottom-color: #b07a7b;   */
+}  
+.canvas-btn-table{  
+    color:#A83FDB;  
+    width:120rpx;  
+    text-align: center;  
+    position: absolute;  
+    left: 240rpx;  
+    top:360rpx;  
+    font-size:26rpx;  
+    background-color: #FFFFFF;  
+    opacity: 0.9;  
+} 
+.imgbg{
+  position: absolute;
+  width: 598rpx;
+  height: 598rpx;
+} 

@@ -15,6 +15,9 @@ Page({
         // 滑动动画时长
         duration: 500,
         circular:true,
+        // 是否展示未登录弹框
+        showDialog:false,
+        getPhoneObj:{},
         // 轮播图
         bannerlist:[
             {
@@ -75,7 +78,19 @@ Page({
 
         ]
     },
-
+    // 是否登录弹框确定
+    getPhoneNumber:function(e){
+        console.log(e.detail,this.data.getPhoneObj.encryptedData);
+        
+    },
+    loginfun:function(){
+        let that = this
+        const params = {
+            encryptedData:this.data.getPhoneObj.encryptedData,
+            iv:this.data.getPhoneObj.iv
+        }
+    },
+    // 
     /**
      * 生命周期函数--监听页面加载
      */
@@ -84,17 +99,22 @@ Page({
     },
     // 列表详情
     positiondetail:function(el){
-        console.log(el.currentTarget.dataset.posid)
-        wx.navigateTo({
-            // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
-            // 通过option.传递的参数名
-            url: '/pages/position_detail/position_detail?posiId=' + el.currentTarget.dataset.posid,
-            success: (result) => {
+        console.log(el.currentTarget.dataset.posid);
+        if(!this.data.showDialog){
+            this.setData({
+                showDialog:true 
+            })
+        }
+        // wx.navigateTo({
+        //     // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
+        //     // 通过option.传递的参数名
+        //     url: '/pages/position_detail/position_detail?posiId=' + el.currentTarget.dataset.posid,
+        //     success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-        });
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        // });
     },
     // 地址选择
     goregion:function(){

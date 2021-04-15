@@ -156,3 +156,15 @@
     background-repeat: no-repeat;
     background-position:436rpx 41rpx;
 }
+.no-login-user {
+    width: 130rpx;
+    height: 130rpx;
+    background: #f9f9f9;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 60rpx auto;
+}
+.no-login-user image {
+    width: 100%;
+    display: block;
+}

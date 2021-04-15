@@ -1,9 +1,0 @@
-<!--pages/lucklydraws/lucklydraws.wxml-->
-<view>
-    <view class="lucky_draw_zp" bindtap="getLucky">
-        <image style="{{zpRotateDeg}}" class="lucky_draw_zp_img" mode="aspectFit" src="../../images/luckdraw_background.png">
-        </image>
-        <image class="lucky_draw_zp_btn" class="lucky_draw_zp_btn" src="../../images/luckdraw_pointer.png"
-            mode="aspectFit"></image>
-    </view>
-</view>

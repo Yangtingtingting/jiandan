@@ -1,2 +1,0 @@
-.lucky_draw_zp{ width: 502rpx; height: 502rpx; margin: 0 auto; position: relative;}
-.lucky_draw_zp_img , .lucky_draw_zp_btn{ width: 100%; height: 100%; position: absolute; left: 0; top: 0;}

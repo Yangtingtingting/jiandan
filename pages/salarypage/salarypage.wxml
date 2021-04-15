@@ -1,16 +1,35 @@
 <!--pages/salarypage/salarypage.wxml-->
 <view class="wrap">
+    <!-- 转盘部分 -->
     <view class="luckydraw">
         <view class="drawimgbox">
             <image mode="aspectFit" src="../../images/luckdraw_back.png"></image>
         </view>
-        <view id="luckdraw_box">
-            <view id="luckdraw_back">
-                <image style='transform:rotate({{ change_angle}}deg)' mode="scaleToFill"
-                    src="/images/luckdraw_background.png"></image>
-            </view>
-            <view id="luckdraw_pointer" bindtap='luckDrawStart'>
-                <image mode="scaleToFill" src="/images/luckdraw_pointer.png"></image>
+        <view class="drawmain">
+            <view class="canvas-container">
+                <view animation="{{animationData}}" class="canvas-content">
+                    <view class="canvas-line">
+                        <view class="canvas-litem" wx:for="{{awardsList}}" wx:for-item="item" wx:for-index="index1"
+                            wx:key="index1" style="transform:{{'rotate('+item.lineTurn+')'}}">{{item.lineTurn}}</view>
+                    </view>
+
+                    <view class="canvas-list">
+                        <image class="imgbg" src="../../images/drawback.png" mode="aspectFit"></image>
+                        <view class="canvas-item" wx:for="{{awardsList}}" wx:key="index2" wx:for-item="iteml"
+                            wx:for-index="index2">
+                            <view class="canvas-item-text" style="transform:{{'rotate('+iteml.turn+')'}}">
+                                <text>{{iteml.award}}</text>
+                                <!-- 每个转盘区域的图标 -->
+                                <!-- <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>   -->
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <view bindtap="playReward" class="{{'canvas-btn '+btnDisabled}}">
+                    <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>
+                </view>
+                <view class="canvas-btn-table">剩余{{chishu}}次</view>
             </view>
         </view>
     </view>
@@ -19,8 +38,8 @@
             <image mode="aspectFit" src="../../images/img_monqd.png"></image>
             <view class="integtext">总积分：44444</view>
         </view>
-        <view class="integraright">
-            去体现
+        <view class="integraright" bindtap="gowallet">
+            去提现
         </view>
     </view>
     <view class="walletlist">

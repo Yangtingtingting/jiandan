@@ -1,5 +1,0 @@
-<!--pages/my_wallet/my_wallet.wxml-->
-<view class="lucky_draw_zp" bindtap="getLucky">
-	<image style="{{zpRotateDeg}}" class="lucky_draw_zp_img" src="{{zpData.zpImg}}" mode="aspectFit"></image>
-	<image class="lucky_draw_zp_btn" src="../../../images/luckdraw_pointer.png" mode="aspectFit"></image>
-</view>

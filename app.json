@@ -1,8 +1,8 @@
 {
   "pages":[
-    "pages/lucklydraws/lucklydraws",
-    "pages/lucklydraw/lucklydraw",
+    "pages/indexnew/indexnew",
     "pages/salarypage/salarypage",
+    "pages/test/index",
     "pages/my_share/my_share",
     "pages/mypersonal/mypersonal",
     "pages/my_wallet/my_wallet",
@@ -10,7 +10,6 @@
     "pages/sign_success/my_success",
     "pages/my_resume/my_resume",
     "pages/partrecord_deatil/partrecord_deatil",
-    "pages/indexnew/indexnew",
     "pages/partrecord/partrecord",
     "pages/partjob/partjob",
     "pages/industrysel/industrysel",

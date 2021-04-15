@@ -3,91 +3,85 @@
 var that;
 Page({
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        salarylist: [{
-                title: '积分兑换',
-                date: '2020-04-01',
-                price: '-20元',
-                src: '../../images/icon_jb.png'
-            },
-            {
-                title: '积分兑换',
-                date: '2020-04-01',
-                price: '-20元',
-                src: '../../images/icon_jb.png'
-            },
-            {
-                title: '积分兑换',
-                date: '2020-04-01',
-                price: '-20元',
-                src: '../../images/icon_jb.png'
-            },
-            {
-                title: '积分兑换',
-                date: '2020-04-01',
-                price: '-20元',
-                src: '../../images/icon_jb.png'
-            },
-        ],
-        is_play: false, // 是否在运动中，避免重复启动bug
-        available_num: 0, // 可用抽奖的次数，可自定义设置或者接口返回
-        start_angle: 0, // 转动开始时初始角度=0位置指向正上方，按顺时针设置，可自定义设置
-        base_circle_num: 9, // 基本圈数，就是在转到（最后一圈）结束圈之前必须转够几圈 ，可自定义设置
-        low_circle_num: 5, // 在第几圈开始进入减速圈（必须小于等于基本圈数），可自定义设置
-        add_angle: 10, // 追加角度，此值越大转动越快，请保证360/add_angle=一个整数，比如1/2/3/4/5/6/8/9/10/12等
-        use_speed: 1, // 当前速度，与正常转速值相等
-        nor_speed: 1, // 正常转速，在减速圈之前的转速，可自定义设置
-        low_speed: 10, // 减速转速，在减速圈的转速，可自定义设置
-        end_speed: 20, // 最后转速，在结束圈的转速，可自定义设置
-        random_angle: 0, // 中奖角度，也是随机数，也是结束圈停止的角度，这个值采用系统随机或者接口返回
-        change_angle: 0, // 变化角度计数，0开始，一圈360度，基本是6圈，那么到结束这个值=6*360+random_angle；同样change_angle/360整除表示走过一整圈
-        result_val: "未中奖", // 存放奖项容器，可自定义设置
-        Jack_pots: [ // 奖项区间 ，360度/奖项个数 ，一圈度数0-360，可自定义设置
-            // random_angle是多少，在那个区间里面就是中哪个奖项
-            {
-                startAngle: 0,
-                endAngle: 60,
-                val: "再接再厉"
-            },
-            {
-                startAngle: 61,
-                endAngle: 121,
-                val: "888"
-            },
-            {
-                startAngle: 122,
-                endAngle: 182,
-                val: "000000"
-            },
-            {
-                startAngle: 183,
-                endAngle: 243,
-                val: "188"
-            },
-            {
-                startAngle: 244,
-                endAngle: 304,
-                val: "88"
-            },
-            {
-                startAngle: 30,
-                endAngle: 360,
-                val: "300"
-            }
-        ]
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    // 中奖奖励
+    salarylist: [{
+        title: '积分兑换',
+        date: '2020-04-01',
+        price: '-20元',
+        src: '../../images/icon_jb.png'
+      },
+      {
+        title: '积分兑换',
+        date: '2020-04-01',
+        price: '-20元',
+        src: '../../images/icon_jb.png'
+      },
+      {
+        title: '积分兑换',
+        date: '2020-04-01',
+        price: '-20元',
+        src: '../../images/icon_jb.png'
+      },
+      {
+        title: '积分兑换',
+        date: '2020-04-01',
+        price: '-20元',
+        src: '../../images/icon_jb.png'
+      },
+    ],
+    // 中奖转盘
+    awardsConfig: {
+      chance: true,
+      awards: [{
+          index: 0,
+          name: '再接再厉',
+          type: 1
+        },
+        {
+          index: 1,
+          name: '300积分',
+          type: 0
+        },
+        {
+          index: 2,
+          name: '88积分',
+          type: 0
+        },
+        {
+          index: 3,
+          name: '188积分',
+          type: 0
+        },
+        {
+          index: 4,
+          name: '再接再厉',
+          type: 1
+        },
+        {
+          index: 5,
+          name: '888积分',
+          type: 0
+        },
+      ]
     },
+    awardsList: [],
+    animationData: {},
+    btnDisabled: '',
+    chishu: 3
+  },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        that = this;
-        // that.luckDrawStart();
-    },
-    /**
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    that = this;
+    // that.luckDrawStart();
+  },
+  /**
    * 启动抽奖
    */
   luckDrawStart: function () {
@@ -103,40 +97,40 @@ Page({
       that.setData({
         random_angle: Math.ceil(Math.random() * 360)
       });
-     // 运动函数
+      // 运动函数
       setTimeout(that.luckDrawChange, that.data.use_speed);
     };
   },
-   /**
+  /**
    * 转盘运动
    */
   luckDrawChange: function () {
     // 继续运动
-     if (that.data.change_angle >= that.data.base_circle_num * 360 + that.data.random_angle) {// 已经到达结束位置
+    if (that.data.change_angle >= that.data.base_circle_num * 360 + that.data.random_angle) { // 已经到达结束位置
       // 提示中奖，
-       that.getLuckDrawResult();
+      that.getLuckDrawResult();
       // 运动结束设置可用抽奖的次数和激活状态设置可用
-       that.luckDrawEndset();
-     } else {// 运动
-       if (that.data.change_angle < that.data.low_circle_num * 360) {// 正常转速
-         // console.log("正常转速")
-         that.data.use_speed = that.data.nor_speed
-       } else if (that.data.change_angle >= that.data.low_circle_num * 360 && that.data.change_angle <= that.data.base_circle_num * 360) {// 减速圈
-         // console.log("减速圈")
-         that.data.use_speed = that.data.low_speed
-       } else if (that.data.change_angle > that.data.base_circle_num * 360) {// 结束圈
+      that.luckDrawEndset();
+    } else { // 运动
+      if (that.data.change_angle < that.data.low_circle_num * 360) { // 正常转速
+        // console.log("正常转速")
+        that.data.use_speed = that.data.nor_speed
+      } else if (that.data.change_angle >= that.data.low_circle_num * 360 && that.data.change_angle <= that.data.base_circle_num * 360) { // 减速圈
+        // console.log("减速圈")
+        that.data.use_speed = that.data.low_speed
+      } else if (that.data.change_angle > that.data.base_circle_num * 360) { // 结束圈
         // console.log("结束圈")
-         that.data.use_speed = that.data.end_speed
-       }
+        that.data.use_speed = that.data.end_speed
+      }
       // 累加变化计数
-       that.setData({
-         change_angle: that.data.change_angle + that.data.add_angle >= that.data.base_circle_num * 360 + that.data.random_angle ? that.data.base_circle_num * 360 + that.data.random_angle : that.data.change_angle + that.data.add_angle
-       });
-       setTimeout(that.luckDrawChange, that.data.use_speed);
-     }
- 
-   },
-   /**
+      that.setData({
+        change_angle: that.data.change_angle + that.data.add_angle >= that.data.base_circle_num * 360 + that.data.random_angle ? that.data.base_circle_num * 360 + that.data.random_angle : that.data.change_angle + that.data.add_angle
+      });
+      setTimeout(that.luckDrawChange, that.data.use_speed);
+    }
+
+  },
+  /**
    * 重置参数
    */
   luckDrawReset: function () {
@@ -188,53 +182,159 @@ Page({
       available_num: that.data.available_num - 1
     });
   },
+  // 去提现
+  gowallet: function () {
+    wx.navigateTo({
+      url: "/pages/my_wallet/my_wallet",
+      success: (result) => {
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
 
-    },
+  },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.drawAwardRoundel() //初始化
+  },
+  //画抽奖圆盘  
+  drawAwardRoundel() {
+    let awards = this.data.awardsConfig.awards;
+    let awardsList = [];
+    let turnNum = 1 / awards.length * 360; // 文字旋转 turn 值
+    // 奖项列表  
+    awards.forEach((item, i) => {
+      awardsList.push({
+        turn: i * turnNum + 'deg',
+        lineTurn: i * turnNum + turnNum / 2 + 'deg',
+        award: item.name
+      });
+    })
+    this.setData({
+      btnDisabled: this.data.awardsConfig.chance ? '' : 'disabled',
+      awardsList: awardsList
+    })
+  },
+  //画抽奖圆盘  
+  drawAwardRoundel() {
+    let awards = this.data.awardsConfig.awards;
+    let awardsList = [];
+    let turnNum = 1 / awards.length * 360; // 文字旋转 turn 值
+    // 奖项列表  
+    awards.forEach((item, i) => {
+      awardsList.push({
+        turn: i * turnNum + 'deg',
+        lineTurn: i * turnNum + turnNum / 2 + 'deg',
+        award: item.name
+      });
+    })
+    this.setData({
+      btnDisabled: this.data.awardsConfig.chance ? '' : 'disabled',
+      awardsList: awardsList
+    })
+  },
+  //发起抽奖  
+  playReward() {
+    if (this.data.chishu == 0) {
+      wx.showToast({
+        title: '抽奖次数已经用完',
+        icon: 'none'
+      })
+      return
     }
+    //中奖index  
+    var awardsNum = this.data.awardsConfig.awards;
+    var awardIndex = 5; //此处为中奖index  
+    var runNum = 8; //旋转8周  
+    var duration = 4000; //时长  
+
+    // 旋转角度    
+    let runDeg = this.data.runDeg || 0;
+    this.setData({
+      runDeg: runDeg + (360 - runDeg % 360) + (360 * runNum - awardIndex * (360 / awardsNum.length))
+    })
+    //创建动画  
+    var animationRun = wx.createAnimation({
+      duration: duration,
+      timingFunction: 'ease'
+    })
+    animationRun.rotate(this.data.runDeg).step();
+    this.setData({
+      animationData: animationRun.export(),
+      btnDisabled: 'disabled'
+    })
+
+    // 中奖提示  
+    var awardsConfig = this.data.awardsConfig;
+    var awardType = awardsConfig.awards[awardIndex].type;
+    this.setData({
+      chishu: this.data.chishu - 1
+    })
+    if (awardType == 0) {
+      setTimeout(function () {
+        wx.showModal({
+          title: '恭喜',
+          content: '获得' + (awardsConfig.awards[awardIndex].name),
+          showCancel: false
+        });
+        this.setData({
+          btnDisabled: ''
+        })
+      }.bind(this), duration);
+    } else {
+      setTimeout(function () {
+        wx.showModal({
+          title: '很遗憾',
+          content: '没中奖 ' + (awardsConfig.awards[awardIndex].name),
+          showCancel: false
+        });
+        this.setData({
+          btnDisabled: ''
+        })
+      }.bind(this), duration);
+    }
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })
