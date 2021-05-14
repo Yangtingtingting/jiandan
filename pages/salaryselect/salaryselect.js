@@ -1,4 +1,7 @@
 // pages/salaryselect/salaryselect.js
+import {
+    getSelectCondition
+} from '../../api/api'
 Page({
 
     /**
@@ -25,21 +28,48 @@ Page({
         ],
         intertypes:''
     },
-    salarytap:function(el){
-        getApp().globalData.intertype = el.currentTarget.dataset.intertype;
-        this.setData({
-            intertypes : el.currentTarget.dataset.intertype
+    // 获取列表信息
+    getsalary:function(){
+        let _this = this;
+        getSelectCondition().then(res => {
+            if (res.code == 0) {
+                let arrlist = res.data.slary;
+                _this.setData({
+                    salaryintervallist: arrlist
+                })
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
         })
-        wx.switchTab({
-            // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
-            // 通过option.传递的参数名
-            url: '/pages/partjob/partjob',
-            success: (result) => {
+    },
+    salarytap:function(el){
+        let salaryid = el.currentTarget.dataset.id;
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+            slaryid: salaryid,
+        })
+        wx.navigateBack({
+            delta: 1  // 返回上一级页面。
+        })
+        console.log(salaryid)
+        // this.setData({
+        //     intertypes : el.currentTarget.dataset.intertype
+        // })
+        // wx.switchTab({
+        //     // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
+        //     // 通过option.传递的参数名
+        //     url: '/pages/partjob/partjob',
+        //     success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-        });
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        // });
     },
     /**
      * 生命周期函数--监听页面加载
@@ -59,7 +89,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.getsalary()
     },
 
     /**

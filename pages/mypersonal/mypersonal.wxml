@@ -1,7 +1,7 @@
 <!--pages/mypersonal/mypersonal.wxml-->
 <view class="wrap">
-    <view class="personhead">
-        <view class="headpic">
+    <view class="personhead" wx:if="{{islogin}}">
+        <view class="headpic" wx:if="{{islogin}}">
             <image class="" src="{{headsrc}}" mode="aspectFit" lazy-load="false" binderror="" bindload=""></image>
         </view>
         <view class="persontext">
@@ -9,32 +9,44 @@
             <view class="per_id">ID：{{per_id}}</view>
         </view>
     </view>
+    <view class="personhead" wx:else bindtap="gologin">
+        <view class="headpic">
+            <image class="" src="../../images/nologinhead.png" mode="aspectFit" lazy-load="false" binderror="" bindload=""></image>
+        </view>
+        <view class="persontext">
+            <view class="per_name">未登录</view>
+            <view class="per_id">请点击登录</view>
+        </view>
+    </view>
     <view class="percontent">
         <view class="personadver">
             <view class="per_ban" bindtap="toresume">
                 <image made="aspectFit" src="../../images/my_img_wdjl.png"></image>
                 <view class="per_resume">
-                    求职中
+                    
                 </view>
             </view>
             <view class="per_ban" bindtap="gowallet">
                 <image made="aspectFit" src="../../images/my_img_wdqb.png"></image>
-                <view class="per_resume">
+                <view class="per_resume" wx:if="{{reminsum}}">
                     余额：
-                    ￥<span>80</span>
+                    ￥<span>{{reminsum}}</span>
                 </view>
             </view>
         </view>
         <view class="adverbanner" bindtap="goshare">
-            <image made="aspectFit" src="../../images/my_img_banner.png"></image>
+            <image made="widthFix" src="../../images/my_img_banner.png"></image>
         </view>
         <view class="partrecord" bindtap="partrecord">
             <image mode="aspectFit" src="../../images/my_icon_jl.png"></image>
             兼职记录
         </view>
-        <view class="partrecord">
-            <image mode="aspectFit" src="../../images/my_icon_kf.png"></image>
+        <view class="partrecord" bindtap="callphone">
+            <image mode="aspectFit" src="../../images/my_icon_kf.png" ></image>
             联系客服
         </view>
+    </view>
+    <view class="copyright">
+        <view>version:0.0.6</view>
     </view>
 </view>

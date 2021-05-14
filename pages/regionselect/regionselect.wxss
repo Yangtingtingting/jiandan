@@ -1,23 +1,38 @@
 /* pages/regionselect/regionselect.wxss */
+
 .van-tree--select {
-    font-size: 40px!important;
-    background-color: pink!important;
+  font-size: 40px !important;
+  background-color: pink !important;
+}
+
+.van-tree-select {
+  width: 100% !important;
+  position: fixed !important;
+}
+
+.leftsheng {
+  background: #fff !important;
+}
+
+.van-tree-select__content {
+  background: #f5f5f5 !important;
+}
+
+.leftactive {
+  background: #f5f5f5 !important;
+  border-left: 4px solid rgba(228, 99, 13, 1) !important;
+  color: rgba(228, 99, 13, 1) !important;
+  font-weight: bold !important;
+}
+
+.van-tree-select {
+  background: #f5f5f5 !important;
+}
+
+.mainclass {
+  background: green;
+}
+.van-tree-select__nav::-webkit-scrollbar {
+  
+  display: none !important;
   }
-.leftsheng{
-    background: #ffffff!important;
-}
-.van-tree-select__content{
-    background: #f5f5f5!important;
-}
-.leftactive{
-    background: #f5f5f5!important;
-    border-left: 4px solid rgba(228, 99, 13, 1)!important;
-    color:rgba(228, 99, 13, 1)!important;
-    font-weight: bold!important;
-}
-.van-tree-select{
-    background: #f5f5f5!important;
-}
-.mainclass{
-    background:green;
-}

@@ -1,91 +1,98 @@
 // pages/partrecord/partrecord.js
+import {
+    getOrder
+} from '../../api/api'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        active:0,
-        recordlist:[
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:1,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'12335'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:2,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'12335'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:3,
-                retitle:"京东超市送货员...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'1233533'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:4,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'124335'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:4,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'612335'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:4,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'1238735'
-            },
-            {
-                retime:"2021-03-31 09：21",
-                restatucs:4,
-                retitle:"四元桥宜家家居电话联络兼职...",
-                reprice:'300/天',
-                readress:"北京市顺义区东兴第一社区 21号",
-                detailid:'1235635'
-            },
-        ]
+        active: 0,
+        recordlist: [],
+        pagenum: 1,
+        listindex:1,
+        totalpage:'',
+        isdatashow:false
+    },
+    // 获取数据
+    getlist: function (listindex,parms,list) {
+        let _this = this;
+        getOrder({
+            status: listindex,
+            page: _this.data.pagenum
+        }).then(res => {
+            if (res.code == 0) {
+                _this.setData({
+                    totalpage:res.data.totalpage
+                })
+                if(res.data.list.length == 0 && res.data.totalpage == 0){
+                    this.setData({
+                        isdatashow:true
+                    })
+                }else if(res.data.totalpage > 1){
+                    this.setData({
+                        showmore:true,
+                        nomsg:false
+                    })
+                }else if(res.data.totalpage <= 1){
+                    this.setData({
+                        // nomsg:true,
+                        showmore:false
+                    })
+                }else{
+                    this.setData({
+                        showmore:false,
+                        // nomsg:false
+                    })
+                }
+                if(parms == 1){
+                    _this.setData({
+                        totalpage:res.data.totalpage,
+                        recordlist:res.data.list,
+                    })
+                }if(parms == 2){
+                    let datalist = res.data.list;
+                    datalist.forEach((item,index) => {
+                        list.push(item)
+                    })
+                    _this.setData({
+                        recordlist:list
+                    })
+                }
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
     },
     // tab切换
     onChange(event) {
-        console.log(event.detail.index)
-        // wx.showToast({
-        //   title: `切换到标签 ${event.detail.name}`,
-        //   icon: 'none',
-        // });
-      },
-      recorddetail:function(el){
-        console.log(el.currentTarget.dataset.recordid);
+        let index = (event.detail.index) +1
+        this.setData({
+            listindex:index,
+            pagenum:1,
+            totalpage:'',
+            isdatashow:false
+        })
+        this.getlist(this.data.listindex,1);
+    },
+    // 详情页
+    recorddetail: function (el) {
         wx.navigateTo({
             // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
             // 通过option.传递的参数名
-            url: '/pages/partrecord_deatil/partrecord_deatil?recordid=' + el.currentTarget.dataset.recordid,
+            url: '/pages/partrecord_deatil/partrecord_deatil?recordid=' + el.currentTarget.dataset.recordid+'&jobid='+el.currentTarget.dataset.jobid,
             success: (result) => {
 
             },
             fail: () => {},
             complete: () => {}
         });
-      },
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -104,7 +111,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.getlist(this.data.listindex,1)
     },
 
     /**
@@ -132,7 +139,28 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let pagenum = this.data.pagenum;
+        console.log(pagenum, this.data.totalpage)
+        // if(this.data.totalpage <= 1)
+        if (pagenum >= this.data.totalpage) {
+            this.setData({
+                showmore: false,
+            })
+        }
+        if (pagenum >= this.data.totalpage) {
+            wx.showToast({
+                title: '加载到底了哦',
+                icon: 'none',
+                duration: 2000
+            })
+        } else {
+            pagenum++;
+            this.setData({
+                pagenum: pagenum,
+            })
+            let arrlist = this.data.recordlist;
+            this.getlist(1,2, arrlist);
+        }
     },
 
     /**

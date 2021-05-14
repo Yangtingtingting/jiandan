@@ -5,6 +5,7 @@
 
 .topcontent {
     padding: 24rpx;
+    padding-bottom: 0px;
 }
 
 .pos_head {
@@ -34,7 +35,7 @@
 
 .pos_msg {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-top: 24rpx;
     padding-bottom: 20rpx;
 }
@@ -52,6 +53,9 @@
 }
 
 .pos_msg view:nth-child(1) {
+    max-width: 257rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAA9dJREFUWEfFVkFIVVkY/s57CcNz27VdPCWYUmqRCA1B3sWAoeOi986x2qQGQaMuGlC3PpejwsxGZ4aBUlpUnnN1UUpF0G0RhWaLBq2BQR7t5l1aKgOT98R/6cr1dt97571NPwhez3/+//u///v/I8NXNvaV86NuAL29vYcbGhqOMsa07/vvl5eXP9RTTE0AOOc/ALjCGDsH4Egs4b9a62cAbiulHpiCMQKQy+XOptPpnwGcpcDZbBatra3IZDJBnt3dXWxtbaFYLIZ5n/u+f8NxnFfVgFQFIIQ4qbV+whhr6ujoQH9/P5qamhLjlkolLCwsYH19HVrrEmPseynlX5VAVAQghDiqtV6n5ENDQ7Btu1pBwbnrupibmwtBdEgp35e7WBZAe3t7Q0tLy0sApwuFQkB5Lba5uYnJyUm68np7e/vMxsbG/0n3ywIQQgwAuDUwMIDu7u5acu/7rq6uYn5+nr4HpZTBL3ErByAlhPjbsqxjs7OzicmJ5lB0JMpy7RkeHobnef9IKb8F4BsByOVyZ9Lp9Iuk6nd2dgJqI4oPYhKI0dHRLwQasrC3t/fd0tIStfSAJTLAOZ9gjBWoesuyDlwgPdDICSHQ2dmJxsZGrKysQCkV6ITOo0aTMTIyQoIsKKUCUUQtEYAQ4i6Ai4uLiwecqerx8fGAbpqKqJHqqS1TU1MBG1Hr6+ujz3tSyktGADjnT5ubm20KFrW1tTXMzMwEVcanglihv9Oe6OnpOXCPdFAqlR4rpbqMAAghHmYyma7PCt6/E8530k4IzyYmJtDW1pbEwCMp5XlTAIktIAEODg4GFFO10VVM39Rv0g3pIt4CrfWCUopGu7oGOOc3GGO/jI2NgdZv1EhwtG5JnHQWipDeA845Pvd7/wqt5enpaRLhT0qpX40A5PP546lU6m2S2CgA0U3toaRkxARNRbz3dBaK0/f9E47jvDMCQE6kAwBdSaMYBqF1SwzEVR+ee54HEiCAxP7TQaVVTMv/TTabTcenIV5FuW8a2WKxuAfglJRyK8mv4muYz+evp1Kp38q1ohKQCPU/Oo7zeznfqv8PcM7nGWP9tYAIk2ut/1BKXa8EtCoAACnO+Z+MsasmICLJbyqlriU9QFFAJgDIn17HewB4JRBhcgBKSnmxWvKKIozTZtv2Icuy7hCIpFdSSgn6oeSe5112XfejiVhNGQhiRUFE13G4hmtNXhMDYTVxEOGyqSd5XQAiTNwHED4uDz3P6zWlvR4RftFO27a/sSxrmQ48z7vguu5/Jj03XsUmwQgE+dWbvO4WmIAz9alpCkyD1uL3CYZEwzAtPl90AAAAAElFTkSuQmCC");
 }
 
@@ -70,7 +74,7 @@
 
 .intro_list view {
     font-size: 28rpx;
-    line-height: 58rpx;
+    /* line-height: 58rpx; */
     color: #555555;
 }
 
@@ -105,12 +109,15 @@
     line-height: 56rpx;
     color: #555555;
 }
-
+.placetitle span{
+    color: red;
+}
 .baiodumap {
     width: 100%;
     height: 370rpx;
     margin-left: 0rpx;
     margin-top: 10rpx;
+    margin-bottom: 108rpx;
     border-radius: 20rpx;
     overflow: hidden;
 }
@@ -121,7 +128,7 @@
 
 .pos_btngroup view {
     float: left;
-    width: 50%;
+    width: 50vw;
     text-align: center;
     line-height: 88rpx;
 }
@@ -146,8 +153,11 @@
 }
 
 .pos_btngroup {
-    padding-bottom: 64rpx;
-    background: #f5f5f5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    margin-top: 64rpx;
 }
 
 .diacontent {
@@ -226,4 +236,7 @@
 }
 .pb20{
     padding-bottom: 26rpx;
+}
+.pb0{
+    padding-bottom: 0px;
 }

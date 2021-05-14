@@ -3,6 +3,7 @@
     "van-dialog": "@vant/weapp/dialog/index"
   },
   "navigationBarBackgroundColor": "#FFCF08",
-  "navigationBarTitleText": "兼职",
+  "navigationBarTitleText": "兼蛋儿",
   "navigationBarTextStyle": "black"
+
 }

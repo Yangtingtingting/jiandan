@@ -14,25 +14,25 @@
                     </van-cell-group>
                     <!-- 选择性别 -->
                     <view>
-                        <van-cell title="性别" is-link bind:click="agePopup" value="男" value-class="rightword" />
+                        <van-cell title="性别" is-link bind:click="sexPopup" value="{{sextext}}" value-class="rightword" />
 
                         <van-popup show="{{ sexshow }}" bind:close="onClose" position="bottom">
                             <view>
-                                <van-picker columns="{{ columns }}" bind:change="onChange" visible-item-count="4"
-                                    default-index="{{ 1 }}" title="" columns="{{ columns }}" />
+                                <van-picker columns="{{ columns }}" bind:change="sexChange" visible-item-count="4"
+                                    default-index="{{changesel}}" title="" columns="{{ columns }}" />
                                 <view class="btngroup">
-                                    <view class="sexcancel" bindtap="sexcancel">取消</view>
-                                    <view class="sexconfirm" bindtap="sexconfirm">确定</view>
+                                    <view class="sexcancel" bindtap="sexCancel">取消</view>
+                                    <view class="sexconfirm" bindtap="sexConfirm">确定</view>
                                 </view>
                             </view>
                         </van-popup>
                     </view>
                     <!-- 年龄选择 -->
                     <view>
-                        <van-cell title="年龄选择" is-link bind:click="showPopup" value-class="rightword" value="{{agelist[0]}}" />
+                        <van-cell title="年龄选择" is-link bind:click="agePopup" value-class="rightword" value="{{agetext}}" />
                         <van-popup show="{{ ageshow }}" bind:close="ageClose" position="bottom">
                             <view>
-                                <van-picker columns="{{ columns }}" bind:change="onChange" default-index="{{ 1 }}"
+                                <van-picker columns="{{ columns }}" bind:change="ageChange" default-index="{{ changeage }}"
                                     visible-item-count="5" title="" columns="{{ agelist }}" />
                                 <view class="btngroup">
                                     <view class="sexcancel" bindtap="agecancel">取消</view>
@@ -44,12 +44,12 @@
                     <van-cell-group>
                         <van-field value="{{ phonenumber }}" label="联系方式" input-align="right" placeholder="请输入手机号码"
                             border="{{ true }}" custom-style="names" bind:change="phoneChange" label-class="textword"
-                            input-class="inputsty" />
+                            input-class="inputsty" type="number" maxlength="11"/>
                     </van-cell-group>
                     <van-cell-group>
-                        <van-field value="{{ phonenumber }}" label="备用联系方式" input-align="right" placeholder="备用联系方式"
-                            border="{{false}}" custom-style="names" bind:change="byChange" label-class="textword"
-                            input-class="inputsty" />
+                        <van-field value="{{ byphonenumber }}" label="备用联系方式" input-align="right" placeholder="备用联系方式"
+                            border="{{false}}" custom-style="names" bind:change="byphoneChange" label-class="textword"
+                            input-class="inputsty" type="number" maxlength="11"/>
                     </van-cell-group>
                 </view>
             </view>
@@ -61,22 +61,22 @@
             <view>
                 <view>
                     <van-cell-group>
-                        <van-field value="{{ stature }}" label="身高" input-align="right" placeholder="请输入身高"
+                        <van-field value="{{ stature }}" label="身高" input-align="right" placeholder="请输入身高(cm)"
                             border="{{ true }}" custom-style="names" bind:change="statureChange" label-class="textword"
-                            input-class="inputsty" />
+                            input-class="inputsty"  type="number"/>
                     </van-cell-group>
                     <van-cell-group>
-                        <van-field value="{{ perweight }}" label="体重" input-align="right" placeholder="请输入体重"
+                        <van-field value="{{ perweight }}" label="体重" input-align="right" placeholder="请输入体重(kg)"
                             border="{{ true }}" custom-style="names" bind:change="weightChange" label-class="textword"
-                            input-class="inputsty" />
+                            input-class="inputsty"  type="number"/>
                     </van-cell-group>
                     <!-- 身体状况 -->
                     <view>
-                        <van-cell title="身体状况" is-link bind:click="bodyPopup" value="{{bodylist[0]}}" value-class="rightword" />
-                        <van-popup show="{{ bodyshow }}" bind:close="ageClose" position="bottom">
+                        <van-cell title="身体状况" is-link bind:click="bodyPopup" value="{{bodytext}}" value-class="rightword" />
+                        <van-popup show="{{ bodyshow }}" bind:close="bodyClose" position="bottom">
                             <view>
-                                <van-picker columns="{{ columns }}" bind:change="onChange" visible-item-count="4"
-                                    default-index="{{ 1 }}" title="性别选择" columns="{{ bodylist }}" />
+                                <van-picker columns="{{ columns }}" bind:change="bodyChange" visible-item-count="4"
+                                    default-index="{{ confirmbody }}" title="选择" columns="{{ bodylist }}" />
                                 <view class="btngroup">
                                     <view class="sexcancel" bindtap="bodycancel">取消</view>
                                     <view class="sexconfirm" bindtap="bodyconfirm">确定</view>
@@ -86,12 +86,12 @@
                     </view>
                     <!-- 选择疾病史 -->
                     <view>
-                        <van-cell title="是否疾病史" is-link bind:click="diseasePopup" value="{{diseasevalue}}" value-class="rightword" />
+                        <van-cell title="是否疾病史" is-link bind:click="diseasePopup" value="{{disestext}}" value-class="rightword" />
 
                         <van-popup show="{{ diseaseshow }}" bind:close="diseaseClose" position="bottom">
                             <view>
-                                <van-picker columns="{{ columns }}" bind:change="diseaseChange" visible-item-count="4"
-                                    item-height="40" default-index="{{ 0 }}" title="" columns="{{ diseaselist }}" />
+                                <van-picker columns="{{ diseaselist }}" bind:change="diseaseChange" visible-item-count="4"
+                                    item-height="40" default-index="{{ confirmdisea }}" title="" columns="{{ diseaselist }}" />
                                 <view class="btngroup">
                                     <view class="sexcancel" bindtap="diseasecancel">取消</view>
                                     <view class="sexconfirm" bindtap="diseaseconfirm">确定</view>
@@ -102,7 +102,8 @@
                     <view wx:if="{{ishistory}}" class="diseasetextarea">
                         <van-cell-group>
                             <van-field value="{{ sickhis }}" type="textarea" autosize=" minHeight: 100"
-                                custom-style="background:#f8f8f8;border-radius:8rpx;width:100%;height:200rpx;padding-left:100rpx;flex-wrap:wrpa"
+                                custom-style="background:#f8f8f8;bind:change=border-radius:8rpx;width:100%;height:200rpx;padding-left:100rpx;flex-wrap:wrpa"
+                                bind:change="sickhisChange"
                                 placeholder="请输入病史" />
                         </van-cell-group>
                     </view>
@@ -112,7 +113,7 @@
                 </view>
             </view>
         </view>
-        <view class="btnsign">
+        <view class="btnsign" bindtap="savemsg">
             保存
         </view>
     </view>

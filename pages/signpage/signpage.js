@@ -1,9 +1,9 @@
+// pages/signpage/signpage.js
 // pages/loginpage/loginpage.js
 import {
     getmarknum,
     login
 } from '../../api/api'
-let app = getApp().globalData;
 Page({
 
     /**
@@ -15,7 +15,7 @@ Page({
         ismark: '',
         // 是否显示倒计时按钮
         iscountdown: "true",
-        countdowntime: 10,
+        countdowntime: 20,
         mark_inter: '',
         // 是否可点击立即报名
         loginbtn: false,
@@ -25,6 +25,7 @@ Page({
     },
     // 获取电话号码
     changephone: function (e) {
+        console.log(e.detail.value)
         this.setData({
             phonenumber: e.detail.value
         })
@@ -40,68 +41,47 @@ Page({
             });
         }
     },
-    // 立即登录
+    // 立即报名
     getsignup: function (e) {
         let _this = this;
-        if(this.data.marknumber.length != 6){
-            wx.showToast({
-                title: '请输入正确的验证码',
-                icon: 'error',
-                duration: 2000
-            })
-            return;
-        }
+        this.setData({
+            phonebot: "1px solid red",
+            markbot: "1px solid red"
+        });
         const parms = {
             mobile: _this.data.phonenumber,
             vcode: _this.data.marknumber,
         }
-        login({
-            mobile: _this.data.phonenumber,
-            vcode: _this.data.marknumber
-        }).then(res => {
-            if (res.code == 0) {
-                // wx.showToast({
-                //     title: '登录成功',
-                //     icon: 'success',
-                //     duration: 1000
-                // })
-                wx.setStorageSync('isloginstaus', true);
-                wx.setStorageSync('logindata', res.data);
-                wx.switchTab({
-                    url: '/pages/mypersonal/mypersonal',
-                    success: (result) => {
-
-                    },
-                    fail: () => {},
-                    complete: () => {}
-                });
-            } else {
-                //登录错误时显示红色的下划线 10手机 11验证码不够 12验证码错误
-                _this.setData({
-                    phonebot: "1px solid red",
-                    markbot: "1px solid red"
-                });
+        login({parms}).then(res=>{
+            if(res.status ==200){
                 wx.showToast({
-                    title: res.msg,
-                    icon: 'error',
-                    duration: 2000
+                    title:'登录成功',
+                    icon: 'success',
+                    duration: 1000
+                })
+                wx.setStorageSync('isloginstaus', res.data);
+            }else{
+                wx.showToast({
+                    title:res.msg,
+                    icon: 'erro',
+                    duration: 1000
                 })
             }
-        })
+        }) 
         // console.log(this.data.phonenumber,this.data.marknumber);
-        // // console.log(456)
-        // wx.setStorageSync('logins', 'true');
+        // console.log(456)
+        wx.setStorageSync('logins', 'true');
     },
     // 获取验证码
     vercode: function () {
         let _this = this;
-        if (!_this.data.phonenumber || _this.data.phonenumber.length < 11) {
+        if (!_this.data.phonenumber) {
             wx.showToast({
                 title: '请输入正确的手机号码',
                 icon: 'none',
                 duration: 2000
             })
-            return false;
+            return;
         }
         if (_this.data.iscountdown) {
             _this.setData({
@@ -125,11 +105,12 @@ Page({
             }, 1000)
             const parms = {
                 mobile: _this.data.phonenumber
-            }
+            } 
             getmarknum(parms).then(res => {
                 if (res.code == 0) {
 
                 } else {
+                    console.log(133)
                     wx.showToast({
                         title: res.msg,
                         icon: 'none',
@@ -143,10 +124,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options)
-        if(options.scene == ''){
 
-        }
     },
 
     /**

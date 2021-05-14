@@ -1,8 +1,12 @@
 // pages/partrecord_deatil/partrecord_deatil.js
+import {
+  getOrderDetail,
+  getAddressCode
+} from '../../api/api'
 const normalCallout = {
     id: 1,
-    latitude: 44.519960,
-    longitude: 130.265330,
+    latitude: wx.getStorageSync('joblatitude'),
+    longitude: wx.getStorageSync('joblongitude'),
     iconPath: '/image/location.png',
     callout: {
       content: '文本内容',
@@ -29,8 +33,8 @@ const normalCallout = {
   
   const customCallout1 = {
     id: 2,
-    latitude: 23.097994,
-    longitude: 113.323520,
+    latitude: wx.getStorageSync('joblatitude'),
+    longitude: wx.getStorageSync('joblongitude'),
     iconPath: '/image/location.png',
     customCallout: {
       anchorY: 0,
@@ -41,8 +45,8 @@ const normalCallout = {
   
   const customCallout2 = {
     id: 3,
-    latitude: 23.096994,
-    longitude: 113.324520,
+    latitude: wx.getStorageSync('joblatitude'),
+    longitude: wx.getStorageSync('joblongitude'),
     iconPath: '/image/location.png',
     customCallout: {
       anchorY: 10,
@@ -53,8 +57,8 @@ const normalCallout = {
   
   const customCallout3 = {
     id: 4,
-    latitude: 23.095994,
-    longitude: 113.325520,
+    latitude: wx.getStorageSync('joblatitude'),
+    longitude: wx.getStorageSync('joblongitude'),
     iconPath: '/image/location.png',
     customCallout: {
       anchorY: 0,
@@ -70,33 +74,83 @@ Page({
      * 页面的初始数据
      */
     data: {
-        latitude: 39.90960456049752,
-        longitude: 116.3972282409668,
+        latitude: '',
+        longitude: '',
         markers: [],
         customCalloutMarkerIds: [],
         num: 1,
         // 是否未报名状态
         issign:'false',
-        detaillist:[
-            {
-                status:'兼职已结束',
-                date:'2020-04-01',
-                title:'京东超市送货员',
-                partsource:'京东超市',
-                partnumber:'6513206150561320',
-                partcpncat:'王麻子',
-                partphone:'78945612302',
-                partadress:'北京市顺义区东兴第一社区 21号',
-                partintroduce:"负责门店内商品无聊和设备收货监督和对所没收商品、无聊和设备的数量质量效期时间"
-            }
-        ]
+        detaillist:{},
+        recordid:'',
+        jobid:''
     },
-
+    // 点击打开地图
+    openmap: function(){
+      let _this = this;
+      wx.getLocation({
+       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+       success (res) {
+         const latitude = _this.data.latitude
+         const longitude = _this.data.longitude
+         wx.openLocation({
+           latitude,
+           longitude,
+           scale: 18
+         })
+       }
+      })
+  },
+    getOrderDetail:function(){
+      let _this = this;
+      getOrderDetail({
+        order_id:_this.data.recordid
+      }).then(res => {
+        if(res.code == 0){
+          _this.setData({
+            detaillist:res.data
+          })
+        }else{
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 2000
+        })
+        }
+      })
+    },
+    getAddressCode:function(){
+      let _this = this;
+      getAddressCode({
+        job_id:_this.data.jobid
+      }).then(res => {
+        if(res.code == 0){
+          wx.setStorageSync('joblatitude',res.data.lat)
+          wx.setStorageSync('joblongitude',res.data.lng)
+          _this.setData({
+            latitude:res.data.lat,
+            longitude:res.data.lng
+          })
+          console.log(res.data)
+        }else{
+          wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 2000
+          })
+        }
+      })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+      this.setData({
+        recordid:options.recordid,
+        jobid:options.jobid
+      })
+      this.getOrderDetail();
+      this.getAddressCode()
     },
 
     /**
@@ -119,7 +173,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      
     },
 
     /**

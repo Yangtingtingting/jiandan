@@ -4,10 +4,13 @@
         <view class="bgimg">
             <image mode="aspectFill" src="../../images/img_yq.png"></image>
         </view>
-        <view class="sharetitle">
+        <view class="sharetitle" bindtap="savecodeimg">
             <view>您的专属二维码</view>
-            <view class="mycode">我是二维码</view>
-            <view>您的专属二维码</view>
+            <view class="mycode">
+                <image src="http://jtegger.com/public/upload/qcode_3.png"></image>
+            </view>
+            <view class="ysm">邀请码：{{invitexode}}</view>
+            <view>点击保存二维码</view>
         </view>
     </view>
     <view class="myinvited">
@@ -20,16 +23,16 @@
                     <image mode="aspectFill" src="../../images/icon_yqhy.png"></image>
                 </view>
                 <view class="letext">
-                    <view class="textpersom">8<span>元</span></view>
+                    <view class="textpersom">{{inperson == ''?0 : inperson}}<span>人</span></view>
                     <view class="textfriend">邀请好友</view>
                 </view>
             </view>
             <view class="inconleft">
                 <view class="leimage">
-                    <image mode="aspectFill" src="../../images/icon_yqhy.png"></image>
+                    <image mode="aspectFill" src="../../images/icon_hdfl.png"></image>
                 </view>
                 <view class="letext">
-                    <view class="textpersom">500<span>元</span></view>
+                    <view class="textpersom">{{inmoney == ''?0 : inmoney}}<span>元</span></view>
                     <view class="textfriend">邀请好友</view>
                 </view>
             </view>
@@ -48,14 +51,27 @@
                     <span wx:if="{{index == 1}}" style="color:#0D80E4;">{{index+1}}</span>
                     <span wx:if="{{index == 2}}" style="color:#FFCF08;">{{index+1}}</span>
                     <span wx:if="{{index > 2}}" style="color:#AAAAAA;">{{index+1}}</span>
-                    {{item.name}}
+                    <i>{{item.mobile}}</i>
+                    
                 </view>
-                <view>{{item.partnum}}</view>
-                <view>{{item.fanlinum}}</view>
+                <view>{{item.work_count}}</view>
+                <view>{{item.rebate}}</view>
             </view>
         </view>
+        <view class="readmore" bindtap="loadmore" wx:if="{{!isshowmsg}}">
+            换一换
+        </view>
+        <view class="nomsg" bindtap="loadmore" wx:if="{{isshowmsg}}">
+                无更多数据!
+            </view>
     </view>
     <view class="btnshare">
         <button>分享好友</button>
+    </view>
+    <view class="sharedia" wx:if="{{shareshow}}" capture-catch:touchmove="preventdefault" bindtap="cancelcon">
+        <view class="diaimg">
+            <image src="http://jtegger.com/public/upload/qcode_3.png" bindlongpress="saveImage"></image>
+        <view class="diaword">长按图片保存二维码</view>
+        </view>
     </view>
 </view>

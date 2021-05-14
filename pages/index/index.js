@@ -7,9 +7,495 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
+    areaitems: [
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '天津',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [{
+                  // 名称
+                  text: '南开区',
+                  // id，作为匹配选中状态的标识
+                  id: 5,
+                  // 禁用选项
+                  disabled: true,
+              },
+              {
+                  text: '滨河',
+                  id: 56,
+              },
+              {
+                  text: '新区',
+                  id: 7,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+      {
+          // 导航名称
+          text: '所有城市',
+          // 导航名称右上角徽标，1.5.0 版本开始支持
+          badge: "",
+          // 是否在导航名称右上角显示小红点，1.5.0 版本开始支持
+          dot: false,
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+              {
+                  // 名称
+                  text: '全城',
+                  // id，作为匹配选中状态的标识
+                  id: 0,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  // 名称
+                  text: '东城区',
+                  // id，作为匹配选中状态的标识
+                  id: 1,
+                  // 禁用选项
+                  disabled: false,
+              },
+              {
+                  text: '西城区',
+                  id: 2,
+              },
+              {
+                  text: '通州区',
+                  id: 3,
+              },
+          ],
+      },
+  ],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    
   },
   // 事件处理函数
   bindViewTap() {

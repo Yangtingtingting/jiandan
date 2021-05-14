@@ -6,6 +6,13 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+.salarybox:after {
+    content: "";
+    width: 30%;
+    height: 0px;
+    visibility: hidden;
+}
 .salaryitem{
     width: 208rpx;
     font-size: 28rpx;

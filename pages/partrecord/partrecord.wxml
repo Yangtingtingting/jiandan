@@ -1,39 +1,182 @@
 <!--pages/partrecord/partrecord.wxml-->
 <view class="box">
-    <van-tabs active="{{ active }}" bind:change="onChange" color="#FFCF08" title-active-color="#111111" title-inactive-color="#AAAAAA">
+    <van-tabs active="{{ active }}" bind:change="onChange" color="#FFCF08" title-active-color="#111111"
+        title-inactive-color="#AAAAAA">
         <van-tab title="申请中" custom-class="outbox">
-            <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.detailid}}" bindtap="recorddetail">
-                <view class="itemtop">
-                    <view class="itemtime">{{item.retime}}</view>
-                    <view class="itembtn perbtned" wx:if="{{item.restatucs == 1}}">
-                        已结算
+            <view wx:if="{{!isdatashow}}">
+                <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
+                    bindtap="recorddetail">
+                    <view class="itemtop">
+                        <view class="itemtime">{{item.inputtime}}</view>
+                        <view class="itembtn perbtned" wx:if="{{item.status == 3}}">
+                            已结算
+                        </view>
+                        <view class="itembtn perbtning" wx:if="{{item.status == 1}}">
+                            申请中
+                        </view>
+                        <view class="itembtn perbtns" wx:if="{{item.status == 4}}">
+                            失败
+                        </view>
+                        <view class="itembtn perbtnill" wx:if="{{item.status == 2}}">
+                            接单中
+                        </view>
                     </view>
-                    <view class="itembtn perbtning" wx:if="{{item.restatucs == 2}}">
-                        结算中
+                    <view class="itemcenter">
+                        <view class="itemtitle">
+                            {{item.title}}
+                        </view>
+                        <view class="itemsalsry">
+                            ￥{{item.price}}
+                        </view>
                     </view>
-                    <view class="itembtn perbtns" wx:if="{{item.restatucs == 3}}">
-                        未结算
-                    </view>
-                    <view class="itembtn perbtnill" wx:if="{{item.restatucs == 4}}">
-                        报名中
+                    <view class="peradress">
+                        {{item.address}}
                     </view>
                 </view>
-                <view class="itemcenter">
-                    <view class="itemtitle">
-                        {{item.retitle}}
+                <view class="loadmore" wx:if="{{showmore}}">加载中...</view>
+            </view>
+            <view class="page404" wx:else>
+                <view class="suc_box">
+                    <view class="imgbox">
+                        <image mode="aspectFit" src="../../images/nologin.png"></image>
                     </view>
-                    <view class="itemsalsry">
-                        {{item.reprice}}
+                    <view class="wordsuccess">
+                        无更多数据
                     </view>
-                </view>
-                <view class="peradress">
-                    {{item.readress}}
                 </view>
             </view>
-            <view class="loadmore">加载中...</view>
         </van-tab>
-        <van-tab title="接单中" custom-class="outbox">内容 2</van-tab>
-        <van-tab title="已结算" custom-class="outbox">内容 3</van-tab>
-        <van-tab title="失败" custom-class="outbox">内容 4</van-tab>
+        <van-tab title="接单中" custom-class="outbox">
+            <view wx:if="{{!isdatashow}}">
+                <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
+                    bindtap="recorddetail">
+                    <view class="itemtop">
+                        <view class="itemtime">{{item.inputtime}}</view>
+                        <view class="itembtn perbtned" wx:if="{{item.status == 3}}">
+                            已结算
+                        </view>
+                        <view class="itembtn perbtning" wx:if="{{item.status == 1}}">
+                            申请中
+                        </view>
+                        <view class="itembtn perbtns" wx:if="{{item.status == 4}}">
+                            失败
+                        </view>
+                        <view class="itembtn perbtnill" wx:if="{{item.status == 2}}">
+                            接单中
+                        </view>
+                    </view>
+                    <view class="itemcenter">
+                        <view class="itemtitle">
+                            {{item.title}}
+                        </view>
+                        <view class="itemsalsry">
+                            ￥{{item.price}}
+                        </view>
+                    </view>
+                    <view class="peradress">
+                        {{item.address}}
+                    </view>
+                </view>
+                <view class="loadmore" wx:if="{{showmore}}">加载中...</view>
+            </view>
+            <view class="page404" wx:else>
+                <view class="suc_box">
+                    <view class="imgbox">
+                        <image mode="aspectFit" src="../../images/nologin.png"></image>
+                    </view>
+                    <view class="wordsuccess">
+                        无更多数据
+                    </view>
+                </view>
+            </view>
+        </van-tab>
+        <van-tab title="已结算" custom-class="outbox">
+            <view wx:if="{{!isdatashow}}">
+                <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}" data-jobid="{{item.job_id}}"
+                    bindtap="recorddetail">
+                    <view class="itemtop">
+                        <view class="itemtime">{{item.inputtime}}</view>
+                        <view class="itembtn perbtned" wx:if="{{item.status == 3}}">
+                            已结算
+                        </view>
+                        <view class="itembtn perbtning" wx:if="{{item.status == 1}}">
+                            申请中
+                        </view>
+                        <view class="itembtn perbtns" wx:if="{{item.status == 4}}">
+                            失败
+                        </view>
+                        <view class="itembtn perbtnill" wx:if="{{item.status == 2}}">
+                            接单中
+                        </view>
+                    </view>
+                    <view class="itemcenter">
+                        <view class="itemtitle">
+                            {{item.title}}
+                        </view>
+                        <view class="itemsalsry">
+                            ￥{{item.price}}
+                        </view>
+                    </view>
+                    <view class="peradress">
+                        {{item.address}}
+                    </view>
+                </view>
+                <view class="loadmore" wx:if="{{showmore}}">加载中...</view>
+            </view>
+            <view class="page404" wx:else>
+                <view class="suc_box">
+                    <view class="imgbox">
+                        <image mode="aspectFit" src="../../images/nologin.png"></image>
+                    </view>
+                    <view class="wordsuccess">
+                        无更多数据
+                    </view>
+                </view>
+            </view>
+        </van-tab>
+        <van-tab title="失败" custom-class="outbox">
+            <view wx:if="{{!isdatashow}}">
+                <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
+                    bindtap="recorddetail">
+                    <view class="itemtop">
+                        <view class="itemtime">{{item.inputtime}}</view>
+                        <view class="itembtn perbtned" wx:if="{{item.status == 3}}">
+                            已结算
+                        </view>
+                        <view class="itembtn perbtning" wx:if="{{item.status == 1}}">
+                            申请中
+                        </view>
+                        <view class="itembtn perbtns" wx:if="{{item.status == 4}}">
+                            失败
+                        </view>
+                        <view class="itembtn perbtnill" wx:if="{{item.status == 2}}">
+                            接单中
+                        </view>
+                    </view>
+                    <view class="itemcenter">
+                        <view class="itemtitle">
+                            {{item.title}}
+                        </view>
+                        <view class="itemsalsry">
+                            ￥{{item.price}}
+                        </view>
+                    </view>
+                    <view class="peradress">
+                        {{item.address}}
+                    </view>
+                </view>
+                <view class="loadmore" wx:if="{{showmore}}">加载中...</view>
+            </view>
+            <view class="page404" wx:else>
+                <view class="suc_box">
+                    <view class="imgbox">
+                        <image mode="aspectFit" src="../../images/nologin.png"></image>
+                    </view>
+                    <view class="wordsuccess">
+                        无更多数据
+                    </view>
+                </view>
+            </view>
+        </van-tab>
     </van-tabs>
 </view>

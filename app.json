@@ -1,29 +1,36 @@
 {
   "pages":[
-    "pages/indexnew/indexnew",
-    "pages/salarypage/salarypage",
-    "pages/test/index",
-    "pages/my_share/my_share",
     "pages/mypersonal/mypersonal",
-    "pages/my_wallet/my_wallet",
+    "pages/concatservice/concatservice",
+    "pages/indexnew/indexnew",
+    "pages/my_share/my_share",
     "pages/position_detail/position_detail",
-    "pages/sign_success/my_success",
-    "pages/my_resume/my_resume",
-    "pages/partrecord_deatil/partrecord_deatil",
     "pages/partrecord/partrecord",
-    "pages/partjob/partjob",
+    "pages/partrecord_deatil/partrecord_deatil",
+    "pages/salarypage/salarypage",
+    "pages/my_wallet/my_wallet",
     "pages/industrysel/industrysel",
-    "pages/regionselect/regionselect",
     "pages/salaryselect/salaryselect",
+    "pages/regionselect/regionselect",
+    "pages/partjob/partjob",
+    "pages/sign_success/my_success",
     "pages/index/index",
+    "pages/my_resume/my_resume",
     "pages/loginpage/loginpage",
-    "pages/logins/logins"
+    "pages/signpage/signpage",
+    "pages/logins/logins",
+    "pages/test/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle":"black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"  
+    }
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {

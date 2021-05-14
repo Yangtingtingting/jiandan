@@ -2,8 +2,9 @@
 <view class="wrap">
     <van-tree-select
   items="{{ areaitems }}"
+  height="200"
   main-active-index="{{ mainActiveIndex }}"
-  active-id="{{ activeId }}"
+  active-id="{{activeId}}"
   bind:click-nav="onClickNav"
   bind:click-item="onClickItem"
   main-item-class="leftsheng"

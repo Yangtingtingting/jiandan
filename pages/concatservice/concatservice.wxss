@@ -1,0 +1,4 @@
+/* pages/concatservice/concatservice.wxss */
+.van-cell__value{
+    color: #333!important;
+}

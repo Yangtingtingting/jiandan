@@ -1,85 +1,162 @@
 // pages/salarypage/salarypage.js
 // 上下文对象
-var that;
+import {
+  getgift,
+  winresult,
+  getfitList
+} from '../../api/api'
+let app = getApp(); 
+const BASE_URL =  app.globalData.BASE_URL
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 中奖奖励
-    salarylist: [{
-        title: '积分兑换',
-        date: '2020-04-01',
-        price: '-20元',
-        src: '../../images/icon_jb.png'
-      },
-      {
-        title: '积分兑换',
-        date: '2020-04-01',
-        price: '-20元',
-        src: '../../images/icon_jb.png'
-      },
-      {
-        title: '积分兑换',
-        date: '2020-04-01',
-        price: '-20元',
-        src: '../../images/icon_jb.png'
-      },
-      {
-        title: '积分兑换',
-        date: '2020-04-01',
-        price: '-20元',
-        src: '../../images/icon_jb.png'
-      },
-    ],
+    // 收入明细列表
+    salarylist: [],
     // 中奖转盘
     awardsConfig: {
       chance: true,
-      awards: [{
-          index: 0,
-          name: '再接再厉',
-          type: 1
-        },
-        {
-          index: 1,
-          name: '300积分',
-          type: 0
-        },
-        {
-          index: 2,
-          name: '88积分',
-          type: 0
-        },
-        {
-          index: 3,
-          name: '188积分',
-          type: 0
-        },
-        {
-          index: 4,
-          name: '再接再厉',
-          type: 1
-        },
-        {
-          index: 5,
-          name: '888积分',
-          type: 0
-        },
-      ]
+      awards: [],
     },
     awardsList: [],
     animationData: {},
     btnDisabled: '',
-    chishu: 3
+    chishu: 3,
+    // 获奖ID
+    awrdid:'',
+    // 获奖index
+    awrdindex:'',
+    // 是否登录
+    islogin:false,
+    pagenum:1,
+    incometol:'',
+    totalpage:'',
+    isshowmsg:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    that = this;
     // that.luckDrawStart();
+    // this.getProfitList();
+  },
+  getProfitList:function(){
+    let _this = this;
+    // wx.request({
+    //   url: BASE_URL+ '/api/Ucenter/getProfitList',
+    //   data:{
+    //     page:_this.data.pagenum
+    //   },
+    //   header: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //       'Jwttoken':wx.getStorageSync('logindata') // 默认值
+    //   },
+    //   success (res) {
+    //     console.log(res.data)
+    //       if(res.data.code == 0){
+    //         console.log(res.data.dat)
+    //            _this.setData({
+    //             salarylist:res.data.data.list,
+    //             incometol:res.data.data.money,
+    //             totalpage:res.data.data.totalpage
+    //         })
+    //       }else{
+    //           wx.showToast({
+    //               title:res.msg,
+    //               icon: 'error',
+    //               duration: 2000
+    //           })
+    //       }
+    //   }
+    // })
+    getfitList({
+        page:_this.data.pagenum
+    }).then(res => {
+        if(res.code == 0){
+          if(res.data.totalpage < 1){
+            _this.setData({
+              isshowmsg:true
+            })
+          }else{
+            _this.setData({
+              salarylist:res.data.list,
+              incometol:res.data.money,
+              totalpage:res.data.totalpage
+          })
+          }
+        }else{
+            // wx.showToast({
+            //     title: res.msg,
+            //     icon: 'none',
+            //     duration: 2000
+            // })
+        }
+    })
+},
+// 加载更多
+loadmore: function () {
+    let pagenum = this.data.pagenum;
+    if (pagenum >= this.data.totalpage) {
+        wx.showToast({
+            title: '没有更多数据了',
+            icon: 'none',
+            duration: 2000
+        })
+    } else {
+        pagenum++;
+        this.setData({
+            pagenum: pagenum
+        });
+        this.getProfitList();
+    }
+}, 
+  // 获奖结果
+  winresult : function(){
+    let that = this;
+    let awards = this.data.awardsConfig.awards;
+    let awardid = "";
+    winresult().then(res => {
+      console.log(res)
+      if (res.code == 0) {
+        awardid = res.data.id;
+        awards.forEach((item, i) => {
+            if(item.id == awardid){
+                awrdindex:i
+               console.log(i)
+              this.setData({
+             })
+            }
+        })
+        that.playReward();
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+  // 获奖列表接口
+  getgift : function() {
+    let that = this;
+    getgift().then(res => {
+      if (res.code == 0) {
+        that.setData({
+          "awardsConfig.awards": res.data?res.data:[]
+        })
+        that.drawAwardRoundel();
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
   /**
    * 启动抽奖
@@ -204,7 +281,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.drawAwardRoundel() //初始化
+    this.setData({
+        islogin:wx.getStorageSync('isloginstaus')
+    })
+    if(this.data.islogin){
+      this.getgift();
+      this.getProfitList();
+    }
+    // this.drawAwardRoundel(); //初始化
   },
   //画抽奖圆盘  
   drawAwardRoundel() {
@@ -224,24 +308,37 @@ Page({
       awardsList: awardsList
     })
   },
-  //画抽奖圆盘  
-  drawAwardRoundel() {
-    let awards = this.data.awardsConfig.awards;
-    let awardsList = [];
-    let turnNum = 1 / awards.length * 360; // 文字旋转 turn 值
-    // 奖项列表  
-    awards.forEach((item, i) => {
-      awardsList.push({
-        turn: i * turnNum + 'deg',
-        lineTurn: i * turnNum + turnNum / 2 + 'deg',
-        award: item.name
-      });
-    })
-    this.setData({
-      btnDisabled: this.data.awardsConfig.chance ? '' : 'disabled',
-      awardsList: awardsList
-    })
+  // 去登陆
+  gologin:function(){
+    wx.navigateTo({
+        // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
+        // 通过option.传递的参数名
+        url: '/pages/loginpage/loginpage',
+        success: (result) => {
+
+        },
+        fail: () => {},
+        complete: () => {}
+    });
   },
+  //画抽奖圆盘  
+  // drawAwardRoundel() {
+  //   let awards = this.data.awardsConfig.awards;
+  //   let awardsList = [];
+  //   let turnNum = 1 / awards.length * 360; // 文字旋转 turn 值
+  //   // 奖项列表  
+  //   awards.forEach((item, i) => {
+  //     awardsList.push({
+  //       turn: i * turnNum + 'deg',
+  //       lineTurn: i * turnNum + turnNum / 2 + 'deg',
+  //       award: item.name
+  //     });
+  //   })
+  //   this.setData({
+  //     btnDisabled: this.data.awardsConfig.chance ? '' : 'disabled',
+  //     awardsList: awardsList
+  //   })
+  // },
   //发起抽奖  
   playReward() {
     if (this.data.chishu == 0) {
@@ -251,9 +348,9 @@ Page({
       })
       return
     }
-    //中奖index  
+    // //中奖index  
     var awardsNum = this.data.awardsConfig.awards;
-    var awardIndex = 5; //此处为中奖index  
+    var awardIndex = this.data.awrdindex; //此处为中奖index  
     var runNum = 8; //旋转8周  
     var duration = 4000; //时长  
 
@@ -275,22 +372,12 @@ Page({
 
     // 中奖提示  
     var awardsConfig = this.data.awardsConfig;
-    var awardType = awardsConfig.awards[awardIndex].type;
+    // var awardType = awardsConfig.awards[awardIndex].type;
+    var awardType = awardsConfig.awards[awardIndex].price;
     this.setData({
       chishu: this.data.chishu - 1
     })
-    if (awardType == 0) {
-      setTimeout(function () {
-        wx.showModal({
-          title: '恭喜',
-          content: '获得' + (awardsConfig.awards[awardIndex].name),
-          showCancel: false
-        });
-        this.setData({
-          btnDisabled: ''
-        })
-      }.bind(this), duration);
-    } else {
+    if(awardType == 0.00){
       setTimeout(function () {
         wx.showModal({
           title: '很遗憾',
@@ -301,7 +388,41 @@ Page({
           btnDisabled: ''
         })
       }.bind(this), duration);
+    }else{
+      setTimeout(function () {
+        wx.showModal({
+          title: '恭喜',
+          content: '获得' + (awardsConfig.awards[awardIndex].name),
+          showCancel: false
+        });
+        this.setData({
+          btnDisabled: ''
+        })
+      }.bind(this), duration);
     }
+    // if (awardType == 0) {
+    //   setTimeout(function () {
+    //     wx.showModal({
+    //       title: '恭喜',
+    //       content: '获得' + (awardsConfig.awards[awardIndex].name),
+    //       showCancel: false
+    //     });
+    //     this.setData({
+    //       btnDisabled: ''
+    //     })
+    //   }.bind(this), duration);
+    // } else {
+    //   setTimeout(function () {
+    //     wx.showModal({
+    //       title: '很遗憾',
+    //       content: '没中奖 ' + (awardsConfig.awards[awardIndex].name),
+    //       showCancel: false
+    //     });
+    //     this.setData({
+    //       btnDisabled: ''
+    //     })
+    //   }.bind(this), duration);
+    // }
   },
   /**
    * 生命周期函数--监听页面隐藏

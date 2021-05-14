@@ -1,31 +1,38 @@
 <!--pages/partrecord_deatil/partrecord_deatil.wxml-->
 <view class="wrap">
-    <view class="recordbox" wx:for="{{detaillist}}" wx:key="index">
+    <view class="recordbox" wx:key="index">
         <view class="record_head">
-            <view class="record_status">{{item.status}}</view>
-            <view class="record_date">{{item.date}}</view>
+            <view class="record_status" wx:if="{{detaillist.status == 1}}">申请中</view>
+            <view class="record_status" wx:if="{{detaillist.status == 2}}">接单中</view>
+            <view class="record_status" wx:if="{{detaillist.status == 3}}">已结算</view>
+            <view class="record_status" wx:if="{{detaillist.status == 4}}">失败</view>
+            <view class="record_date">{{detaillist.inputtime}}</view>
         </view>
         <view class="record_person">
             <view class="record_position">
-                {{item.title}}
+                {{detaillist.title}}
             </view>
             <view class="record_soure">
-                兼职来源：{{item.partsource}}
+                结算金额：{{detaillist.price}}
             </view>
             <view class="record_soure">
-                兼职编号：{{item.partnumber}}
+                兼职编号：{{detaillist.order_num}}
             </view>
-            <view class="record_soure">
+            <view class="record_soure" wx:if="{{detaillist.marker}}">
+                失败原因：{{detaillist.marker}}
+            </view>
+            <!-- <view class="record_soure">
                 联系人 ：{{item.partcpncat}}
             </view>
             <view class="record_soure">
                 联系电话：{{item.partphone}}
-            </view>
+            </view> -->
         </view>
         <view class="record_adress">
             <view class="adresstitle">工作地点</view>
-            <view class="adressdetail">
-                {{item.partadress}}
+            <view class="adressdetail" bindtap="openmap">
+                {{detaillist.address}}
+                <span wx:if="{{detaillist.address}}">(点击查看详细位置)</span> 
             </view>
             <view class="baiodumap">
                 <map id="myMap" style="width: 100%; height: 370rpx;" latitude="{{latitude}}" longitude="{{longitude}}"
@@ -49,12 +56,12 @@
         <view class="record_introduce">
             <view class="adresstitle">职位介绍</view>
             <view class="partintroduce">
-                {{item.partintroduce}}
+                {{detaillist.description}}
             </view>
         </view>
         <!-- 如果状态为已报名那就显示取消报名按钮 -->
-        <view class="cnacelbtn" wx:if="issign">
+        <!-- <view class="cnacelbtn" wx:if="issign">
             取消报名
-        </view>
+        </view> -->
     </view>
 </view>

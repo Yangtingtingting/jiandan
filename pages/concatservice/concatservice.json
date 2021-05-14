@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
+  },
+  "navigationBarBackgroundColor": "#FFCF08",
+  "navigationBarTitleText": "联系客服",
+  "navigationBarTextStyle": "black"
+}

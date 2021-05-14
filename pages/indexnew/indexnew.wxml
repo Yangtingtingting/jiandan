@@ -5,7 +5,7 @@
             {{citys}}
         </view>
         <view class="searchinput">
-            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" />
+            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" bindinput=searchvalue"  bindconfirm="searchlist" />
         </view>
     </view>
     <view class="contentbox">
@@ -30,11 +30,11 @@
                 <view class="partitem" bindtap="positiondetail" data-posid="{{item.id}}">
                     <view class="partitemtitle">
                         {{item.title}}
-                        <span>{{item.salary}}</span>
+                        <span>{{item.slary}}</span>
                     </view>
                     <view class="partitemadress">
-                        {{item.parttime}}
-                        <span>{{item.partadress}}</span>
+                        {{item.end_time}}
+                        <span>{{item.province}}{{item.city}}</span>
                     </view>
                     <view class="partitembtn">
                         平台担保
@@ -42,11 +42,20 @@
                 </view>
             </view>
         </view>
-        <view class="readmore">
-            查看更多职位
+        <view class="readmore" bindtap="loadmore" wx:if="{{ishowchange}}">
+            <view>
+                <image src="../../images/hyh.png"></image>
+                <span>换一换</span>
+            </view>
+        </view>
+        <view class="readmore" bindtap="sloadmore" wx:if="{{ishowchanges}}">
+            换一换
+        </view>
+        <view class="nolist" wx:if="{{snomsg}}">
+            无更多数据 
         </view>
     </view>
-    <van-dialog 
+    <!-- <van-dialog 
         use-slot
         title="您还未登录"
         message="是否允许获取您的手机号进行登录操作？"
@@ -55,6 +64,17 @@
         show-cancel-button
         confirm-button-open-type="getPhoneNumber"
         bind:getphonenumber="getPhoneNumber"  >  
+        <view class="no-login-user">
+            <image src="../../images/userIcon.png" mode="widthFix"></image> 
+        </view>
+    </van-dialog> -->
+    <van-dialog 
+        use-slot
+        title="您还未登录"
+        show="{{ showDialog }}"
+        confirm-button-color="#F18101" 
+        show-cancel-button
+        bind:confirm="gologins">  
         <view class="no-login-user">
             <image src="../../images/userIcon.png" mode="widthFix"></image> 
         </view>

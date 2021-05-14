@@ -1,0 +1,9 @@
+<!--pages/concatservice/concatservice.wxml-->
+<view>
+    <van-cell-group>
+        <van-cell title="email" value="{{email}}" />
+        <van-cell title="手机号" value="{{mobile}}" />
+        <van-cell title="微信号" value="{{weixin}}" />
+        <van-cell title="QQ号" value="{{qq}}" />
+    </van-cell-group>
+</view>

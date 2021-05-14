@@ -1,61 +1,90 @@
 <!--pages/salarypage/salarypage.wxml-->
 <view class="wrap">
-    <!-- 转盘部分 -->
-    <view class="luckydraw">
-        <view class="drawimgbox">
-            <image mode="aspectFit" src="../../images/luckdraw_back.png"></image>
-        </view>
-        <view class="drawmain">
-            <view class="canvas-container">
-                <view animation="{{animationData}}" class="canvas-content">
-                    <view class="canvas-line">
-                        <view class="canvas-litem" wx:for="{{awardsList}}" wx:for-item="item" wx:for-index="index1"
-                            wx:key="index1" style="transform:{{'rotate('+item.lineTurn+')'}}">{{item.lineTurn}}</view>
-                    </view>
+    <view class="showbox" wx:if="{{islogin}}">
+        <!-- 转盘部分 -->
+        <view class="luckydraw">
+            <view class="drawimgbox">
+                <image mode="aspectFit" src="../../images/luckdraw_back.png"></image>
+            </view>
+            <view class="drawmain">
+                <view class="canvas-container">
+                    <view animation="{{animationData}}" class="canvas-content">
+                        <view class="canvas-line">
+                            <view class="canvas-litem" wx:for="{{awardsList}}" wx:for-item="item" wx:for-index="index1"
+                                wx:key="index1" style="transform:{{'rotate('+item.lineTurn+')'}}">{{item.lineTurn}}
+                            </view>
+                        </view>
 
-                    <view class="canvas-list">
-                        <image class="imgbg" src="../../images/drawback.png" mode="aspectFit"></image>
-                        <view class="canvas-item" wx:for="{{awardsList}}" wx:key="index2" wx:for-item="iteml"
-                            wx:for-index="index2">
-                            <view class="canvas-item-text" style="transform:{{'rotate('+iteml.turn+')'}}">
-                                <text>{{iteml.award}}</text>
-                                <!-- 每个转盘区域的图标 -->
-                                <!-- <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>   -->
+                        <view class="canvas-list">
+                            <image class="imgbg" src="../../images/drawback.png" mode="aspectFit"></image>
+                            <view class="canvas-item" wx:for="{{awardsList}}" wx:key="index2" wx:for-item="iteml"
+                                wx:for-index="index2">
+                                <view class="canvas-item-text" style="transform:{{'rotate('+iteml.turn+')'}}">
+                                    <text>{{iteml.award}}</text>
+                                    <!-- 每个转盘区域的图标 -->
+                                    <!-- <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>   -->
+                                </view>
                             </view>
                         </view>
                     </view>
-                </view>
 
-                <view bindtap="playReward" class="{{'canvas-btn '+btnDisabled}}">
-                    <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>
+                    <view bindtap="winresult" class="{{'canvas-btn '+btnDisabled}}">
+                        <image class="canvas-item-text-img" src="../../images/luckdraw_pointer.png"></image>
+                    </view>
+                    <!-- <view class="canvas-btn-table">剩余{{chishu}}次</view> -->
                 </view>
-                <view class="canvas-btn-table">剩余{{chishu}}次</view>
+            </view>
+        </view>
+        <view class="integralbox">
+            <view class="integraleft">
+                <image mode="aspectFit" src="../../images/img_monqd.png"></image>
+                <view class="integtext">总金额：{{incometol}}</view>
+            </view>
+            <view class="integraright" bindtap="gowallet">
+                去提现
+            </view>
+        </view>
+        <view class="walletlist">
+            <view class="adresstitle">收入明细</view>
+            <view class="wallitem" wx:for="{{salarylist}}" wx:key="index">
+                <view class="walletcontent">
+                <view class="wallleft">
+                    <view class="wallimgbox">
+                        <image  wx:if="{{item.status == 2}}"  mode="aspectFit" src="../../images/icon_wx.png"></image>
+                        <image wx:else mode="aspectFit" src="../../images/icon_jb.png"></image>
+                    </view>
+                    <view class="walltext">
+                        <view wx:if="{{item.status == 1}}">
+                            <span wx:if="{{item.type == 1}}">积分抽奖</span>
+                            <span wx:if="{{item.type == 2}}">兼职结算</span>
+                            <span wx:if="{{item.type == 3}}">邀请好友</span>
+                        </view>
+                        <view wx:if="{{item.status == 2}}">微信提现</view>
+                        <view>{{item.inputtime}}</view>
+                    </view>
+                </view>
+                <view  class="wallright">
+                    <span wx:if="{{item.status == 1}}">+</span>
+                    <span wx:if="{{item.status == 2}}">-</span>
+                    {{item.money}}
+                </view>
+            </view>
+            </view>
+            <view class="readmore" bindtap="loadmore" wx:if="{{!isshowmsg}}">
+                换一换
+            </view>
+            <view class="nomsg" bindtap="loadmore" wx:if="{{isshowmsg}}">
+                无更多数据!
             </view>
         </view>
     </view>
-    <view class="integralbox">
-        <view class="integraleft">
-            <image mode="aspectFit" src="../../images/img_monqd.png"></image>
-            <view class="integtext">总积分：44444</view>
-        </view>
-        <view class="integraright" bindtap="gowallet">
-            去提现
-        </view>
-    </view>
-    <view class="walletlist">
-        <view class="adresstitle">收入明细</view>
-        <view class="wallitem" wx:for="{{salarylist}}" wx:key="index">
-            <view class="walletcontent">
-                <view class="wallleft">
-                    <view class="wallimgbox">
-                        <image mode="aspectFit" src="{{item.src}}"></image>
-                    </view>
-                    <view class="walltext">
-                        <view>{{item.title}}</view>
-                        <view>{{item.date}}</view>
-                    </view>
-                </view>
-                <view class="wallright">{{item.price}}</view>
+    <view class="nologins" wx:else>
+        <view class="suc_box">
+            <view class="imgbox">
+                <image mode="aspectFit" src="../../images/nologin.png"></image>
+            </view>
+            <view class="continuebtn">
+                <button bindtap="gologin" id="continuebtn">去登录</button>
             </view>
         </view>
     </view>

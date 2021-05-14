@@ -1,47 +1,23 @@
 // pages/my_wallet/my_wallet.js
+import {
+    getfitList,
+    tixian
+  } from '../../api/api'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        incometol:'￥85132',
+        incometol:'',
         iserrowprd:false,
         btnshow:false,
         // 体现金额
         refvalue:'',
-        walllist:[
-            {
-                title:'微信提现',
-                date:'2020-04-01',
-                price:'+60元',
-                src:'../../images/icon_wx.png'
-            },
-            {
-                title:'微信提现',
-                date:'2020-04-01',
-                price:'+60元',
-                src:'../../images/icon_wx.png'
-            },
-            {
-                title:'微信提现',
-                date:'2020-04-01',
-                price:'+60元',
-                src:'../../images/icon_wx.png'
-            },
-            {
-                title:'积分兑换',
-                date:'2020-04-01',
-                price:'-20元',
-                src:'../../images/icon_jb.png'
-            },
-            {
-                title:'积分兑换',
-                date:'2020-04-01',
-                price:'-20元',
-                src:'../../images/icon_jb.png'
-            },
-        ]
+        walllist:[],
+        pagenum: 1,
+        totalpage:'',
+        isshowmsg:false
     },
 
     /**
@@ -50,11 +26,76 @@ Page({
     onLoad: function (options) {
 
     },
+    // 获取列表数据
+    getProfitList:function(){
+        let _this = this;
+        console.log(wx.getStorageSync('logindata'))
+        getfitList({
+            page:_this.data.pagenum
+        }).then(res => {
+            if(res.code == 0){
+                if(res.data.totalpage < 1){
+                    _this.setData({
+                        isshowmsg:true
+                      })
+                }else{
+                    _this.setData({
+                        walllist:res.data.list,
+                        incometol:res.data.money,
+                        totalpage:res.data.totalpage
+                    })
+                }
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+    },
+    // 加载更多
+    loadmore: function () {
+        let pagenum = this.data.pagenum;
+        if (pagenum >= this.data.totalpage) {
+            wx.showToast({
+                title: '没有更多数据了',
+                icon: 'none',
+                duration: 2000
+            })
+        } else {
+            pagenum++;
+            this.setData({
+                pagenum: pagenum
+            });
+            this.getProfitList();
+        }
+    }, 
+    // 立即提现
+    tixian:function(){
+        let _this = this;
+        tixian({
+            money:_this.data.refvalue
+        }).then(res => {
+            if(res.code == 0){
+                console.log(res)
+            }else{
+                _this.setData({
+                    refvalue: '',
+                    btnshow:false
+                });
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+    },
     txprice:function(e){
         this.setData({
             refvalue: e.detail.value
         });
-        console.log(this.data.refvalue.length)
         if(this.data.refvalue.length > 0){
             this.setData({
                 btnshow:true
@@ -76,7 +117,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.getProfitList()
     },
 
     /**

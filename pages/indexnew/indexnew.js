@@ -1,11 +1,27 @@
 // pages/indexnew/indexnew.js
+import {
+    getIndexData,
+    getJoblist
+} from '../../api/api'
+const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        citys:'杭州',
+        /**
+         * 是否定位我的位置
+         */
+        myCity: {
+            type: Boolean,
+            value: false,
+        },
+        isUserLocation: '',
+        citys: '',
+        citytt: '',
+        shengpro: '',
+        citypro: '',
         // 是否垂直滑动
         vertical: false,
         // 自动播放
@@ -14,95 +30,167 @@ Page({
         interval: 2000,
         // 滑动动画时长
         duration: 500,
-        circular:true,
+        circular: true,
         // 是否展示未登录弹框
-        showDialog:false,
-        getPhoneObj:{},
+        showDialog: false,
+        listerro: '',
+        slisterro: '',
+        getPhoneObj: {},
+        addr: "",
         // 轮播图
-        bannerlist:[
-            {
-                srcpath:"../../images/bannerimg.png"
+        bannerlist: [{
+                srcpath: "../../images/bannerimg.png"
             },
             {
-                srcpath:"../../images/bannerimg.png"
+                srcpath: "../../images/bannerimg.png"
             },
             {
-                srcpath:"../../images/bannerimg.png"
+                srcpath: "../../images/bannerimg.png"
             }
         ],
         // 兼职列表
-        partjoblist:[
-            {
-                title:'餐饮小时工',
-                salary:'310/天',
-                parttime:'03.30-04.01',
-                partadress:'望京soho',
-                id:'00123'
-            },
-            {
-                title:'外卖小哥',
-                salary:'340/天',
-                parttime:'03.30-04.01',
-                partadress:'望京soho',
-                id:'00124'
-            },
-            {
-                title:'超市售货员',
-                salary:'310/天',
-                parttime:'03.30-04.01',
-                partadress:'望京soho',
-                id:'00125'
-            },
-            {
-                title:'北京百丽鞋业导购员',
-                salary:'600/天',
-                parttime:'03.30-04.01',
-                partadress:'望京soho',
-                id:'001256'
-            },
-            {
-                title:'北京百丽鞋业导购员',
-                salary:'900/天',
-                parttime:'03.30-04.01',
-                partadress:'鹿港小镇北京中海...',
-                id:'001257'
-            },
-            {
-                title:'打包装袋小时工',
-                salary:'200/天',
-                parttime:'03.30-04.01',
-                partadress:'望京soho',
-                id:'001255'
-            },
-            
+        partjoblist: [],
+        // 授权遮罩层
+        shouquanDialog: false,
+        userInfo: {},
+        cityName: '',
+        pagenum: 1,
+        // 展示的省份
+        showsheng:'',
+        searchvalue:'',
+        ishowchange:true,
+        spagenum:1,
+        snomsg:false,
+        ishowchanges:false,
+        totalpsge:'',
+        islogin:false
+    },
+    gologins: function (e) {
+        wx.navigateTo({
+            // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
+            // 通过option.传递的参数名
+            url: '/pages/loginpage/loginpage',
+            success: (result) => {
 
-        ]
+            },
+            fail: () => {},
+            complete: () => {}
+        });
     },
-    // 是否登录弹框确定
-    getPhoneNumber:function(e){
-        console.log(e.detail,this.data.getPhoneObj.encryptedData);
-        
+    // 解析经纬度
+    getDistrict(latitude, longitude) {
+        let _this = this;
+        let keys = 'OE3BZ-2JIKD-RIP4C-P66GG-SMGWF-WOFXU'
+        wx.request({
+            url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${keys}`,
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+                // 省
+                let province = res.data.result.address_component.province;
+                // // 市
+                let city = res.data.result.address_component.city;
+                // // 区
+                let district = res.data.result.address_component.district;
+                wx.setStorageSync('shprovince', province);
+                wx.setStorageSync('citypro', province);
+                let sheng = '';
+                if (province.length > 3) {
+                    sheng = shprovince.slice(0, 3);
+                    _this.setData({
+                        showsheng:sheng
+                    })
+                    wx.setStorageSync('showsheng', sheng);
+                    this.setData({
+                        citys:sheng
+                    })
+                } else {
+                    _this.setData({
+                        citys: province,
+                        citytt:province
+                    })
+                    wx.setStorageSync('showsheng', province);
+                }
+                _this.setData({
+                    citys: province
+                })
+            }
+        })
     },
-    loginfun:function(){
-        let that = this
-        const params = {
-            encryptedData:this.data.getPhoneObj.encryptedData,
-            iv:this.data.getPhoneObj.iv
+    // 获取首页列表
+    getindexlist: function () {
+        let _this = this;
+        getIndexData({
+            province: wx.getStorageSync('showsheng'),
+            page: _this.data.pagenum
+        }).then(res => {
+            if (res.code == 0) {
+                _this.setData({
+                    partjoblist: res.data
+                })
+            }else if(res.code == 43){
+                _this.setData({
+                    listerro: res.msg
+                })
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+    },
+    // 加载更多换一换
+    loadmore: function () {
+        let pagenum = this.data.pagenum;
+        if (this.data.listerro == '没有新数据了') {
+            wx.showToast({
+                title: '没有更多数据了',
+                icon: 'none',
+                duration: 2000
+            })
+        } else {
+            pagenum++;
+            this.setData({
+                province: wx.getStorageSync('shprovince'),
+                pagenum: pagenum
+            });
+            this.getindexlist();
         }
     },
-    // 
+    
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getSetting();
+        this.setData({
+            citys:wx.getStorageSync('showsheng')
+        })
+        this.getindexlist();
     },
     // 列表详情
-    positiondetail:function(el){
-        console.log(el.currentTarget.dataset.posid);
-        if(!this.data.showDialog){
+    positiondetail: function (el) {
+        let isloginstaus = wx.getStorageSync('isloginstaus');
+        if (isloginstaus) {
             this.setData({
-                showDialog:true 
+                showDialog: false
+            });
+            wx.navigateTo({
+                // 拼接传参，标签上通过data-xxx="0000"，接收在onload里面0000
+                // 通过option.传递的参数名
+                url: '/pages/position_detail/position_detail?posiId=' + el.currentTarget.dataset.posid,
+                success: (result) => {
+
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        } else {
+            this.setData({
+                showDialog: true
             })
         }
         // wx.navigateTo({
@@ -117,9 +205,9 @@ Page({
         // });
     },
     // 地址选择
-    goregion:function(){
+    goregion: function () {
         wx.navigateTo({
-            url:"/pages/regionselect/regionselect",
+            url: "/pages/regionselect/regionselect",
             success: (result) => {
 
             },
@@ -134,19 +222,167 @@ Page({
     onReady: function () {
 
     },
+    getSetting() {
+        let that = this
+        // 查看是否授权
+        wx.getSetting({
+            success(res) {
+                if (res.authSetting['scope.userInfo']) {
+                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                    wx.getUserInfo({
+                        success: function (res) {
+                            wx.setStorageSync('userInfo', res.userInfo)
+                            that.setData({
+                                shouquanDialog: false,
+                                userInfo: res.userInfo
+                            })
+                        }
+                    })
+                }
+                // console.log(res.authSetting['scope.userLocation'])
+                that.setData({
+                    isUserLocation: res.authSetting['scope.userLocation']
+                })
+                if (!res.authSetting['scope.userLocation']) {
+                    // console.log(res.authSetting['scope.userLocation'])
+                    // 2.如果接口不能调用，请求调用
+                    // 3.获取当前的地理位置、速度
+                    wx.getLocation({
+                        type: 'wgs84',
+                        success: function (getLocationRes) {
+                            that.getDistrict(getLocationRes.latitude, getLocationRes.longitude);
+                            that.setData({
+                                cityName: '',
+                                isUserLocation: true
+                            });
+                        },
+                        fail: function (getLocationRes) {
+                            wx.showModal({
+                                title: '猜您位置88',
+                                content: '北京',
+                                cancelText: '手动定位',
+                                confirmText: '继续使用',
+                                success(result) {
+                                    if (result.confirm) {
+                                        // wx.setStorageSync('currentAddress', {
+                                        //     latitude: 39.90998,
+                                        //     longitude: 116.65714,
+                                        //     address: '北京',
+                                        //     showsheng
+                                        // })
+                                        wx.setStorageSync('showsheng','北京'),
+                                        that.setData({
+                                            province: wx.getStorageSync('showsheng'),
+                                            pagenum: pagenum
+                                        });
+                                        this.getindexlist();
+                                        // that.setData({
+                                        //     cityName: '北京',
+                                        //     cityObj: {
+                                        //         latitude: 39.90998,
+                                        //         longitude: 116.65714,
+                                        //         address: '北京'
+                                        //     },
+                                        //     isUserLocation: true
+                                        // })
+                                        that.teacherInfoList()
+                                    } else if (result.cancel) {
+                                        wx.navigateTo({
+                                            url: '/pages/regionselect/regionselect'
+                                        })
+                                    }
+                                }
+                            })
 
+                        }
+                    })
+                }
+            }
+        })
+    },
+    searchvalue:function(e){
+        this.setData({
+            searchvalue:e.detail.value
+        })
+    },
+    // 加载更多换一换sousuo
+    sloadmore: function () {
+        let spagenum = this.data.spagenum;
+        if (this.data.totalpage >= 0) {
+            wx.showToast({
+                title: '没有更多数据了',
+                icon: 'none',
+                duration: 2000
+            })
+        } else {
+            spagenum++;
+            this.setData({
+                // province: wx.getStorageSync('shprovince'),
+                spagenum: spagenum
+            });
+            this.searchlist();
+        }
+    },
+    searchlist:function(){
+        let _this = this;
+        if (_this.data.islogin) {
+            _this.setData({
+                ishowchange:false
+            })
+            getJoblist({
+                page: _this.data.spagenum,
+                search: _this.data.searchvalue,
+            }).then(res => {
+                if (res.code == 0) {
+                    _this.setData({
+                        totalpage:res.data.totalpage,
+                        partjoblist: res.data.list
+                    })
+                    if(res.data.list.length < 1){
+                        _this.setData({
+                            snomsg:true,
+                            ishowchange:false
+                        })
+                    }else{
+                        _this.setData({
+                            // 换一换搜索
+                            ishowchanges:true,
+                            ishowchange:false,
+                            snomsg:false
+                        })
+                    }
+                } else {
+                    wx.showToast({
+                        title: res.msg,
+                        icon: 'none',
+                        duration: 2000
+                    })
+                }
+            })
+        }else{
+            _this.setData({
+                showDialog: true
+            })
+        }
+    },
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.setData({
+            citys:wx.getStorageSync('showsheng'),
+            islogin: wx.getStorageSync('isloginstaus')
+        });
+        this.getindexlist();
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        this.setData({
+            showDialog:false
+        })
     },
 
     /**
@@ -160,14 +396,12 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
     },
 
     /**

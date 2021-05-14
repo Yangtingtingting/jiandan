@@ -1,16 +1,16 @@
 <!--pages/partjob/partjob.wxml-->
 <view class="wrap">
     <view class="nacsearch">
-        <view class="navtext">
+        <view class="navtext" bindtap="goregion">
             {{citys}}
         </view>
         <view class="searchinput">
-            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" />
+            <input type="text" placeholder="搜职位/公司" placeholder-class="searchplace" bindinput="searvalue" bindconfirm="searchlist"/>
         </view>
     </view>
     <view class="contentwrap">
         <view class="navimg">
-            <view class="partimg">
+            <view class="partimg" bindtap="alljob">
                 <image mode="aspectFit" src="../../images/ptj_icon_qbjz.png"></image>
                 <view class="parttext">
                     全部兼职
@@ -40,14 +40,14 @@
                 推荐兼职
             </view>
             <view class="partlists" wx:for="{{partjoblist}}"  wx:key="index">
-                <view class="partitem">
+                <view class="partitem"  data-posid="{{item.id}}"  bindtap="gopartdetail">
                     <view class="partitemtitle">
                         {{item.title}}
-                        <span>{{item.salary}}</span>
+                        <span>{{item.slary}}</span>
                     </view>
                     <view class="partitemadress">
-                        {{item.parttime}}
-                        <span>{{item.partadress}}</span>
+                        {{item.end_time}}
+                        <span>{{item.address}}</span>
                     </view>
                     <view class="partitembtn">
                         平台担保
@@ -55,8 +55,22 @@
                 </view>
             </view>
         </view>
-        <view class="readmore">
+        <view class="readmore" wx:if="{{nomsg}}">
+                无更多数据
+        </view>
+        <view class="readmore" wx:if="{{showmore}}">
             加载更多
         </view>
     </view>
+    <van-dialog 
+        use-slot
+        title="您还未登录"
+        show="{{ showDialog }}"
+        confirm-button-color="#F18101" 
+        show-cancel-button
+        bind:confirm="gologins">  
+        <view class="no-login-user">
+            <image src="../../images/userIcon.png" mode="widthFix"></image> 
+        </view>
+    </van-dialog>
 </view>

@@ -2,15 +2,15 @@
 <view class="wrap">
     <view class="wal_head">
         <view class="headcontent">
-            <view>总收入<span>{{incometol}}</span></view>
+            <view>总收入<span>￥{{incometol}}</span></view>
             <view class="txinput">
-                <input type="text" placeholder-class="txplace" placeholder="请输入提现金额" bindinput="txprice" value="{{refvalue}}"/>
+                <input type="number" placeholder-class="txplace" placeholder="请输入提现金额" bindinput="txprice" value="{{refvalue}}"/>
             </view>
             <view class="errword" wx:if="{{iserrowprd}}">
                 本月未兼职，无法进行提现
             </view>
             <view class="btngroup">
-                <button wx:if="{{btnshow}}" class="showbtn">立即提现</button>
+                <button wx:if="{{btnshow}}" class="showbtn" bindtap="tixian">立即提现</button>
                 <button wx:if="{{!btnshow}}" class="nonebtn">立即提现</button>
             </view>
         </view>
@@ -21,15 +21,31 @@
             <view class="walletcontent">
                 <view class="wallleft">
                     <view class="wallimgbox">
-                        <image mode="aspectFit" src="{{item.src}}"></image>
+                        <image  wx:if="{{item.status == 2}}"  mode="aspectFit" src="../../images/icon_wx.png"></image>
+                        <image wx:else mode="aspectFit" src="../../images/icon_jb.png"></image>
                     </view>
                     <view class="walltext">
-                        <view>{{item.title}}</view>
-                        <view>{{item.date}}</view>
+                        <view wx:if="{{item.status == 1}}">
+                            <span wx:if="{{item.type == 1}}">积分抽奖</span>
+                            <span wx:if="{{item.type == 2}}">兼职结算</span>
+                            <span wx:if="{{item.type == 3}}">邀请好友</span>
+                        </view>
+                        <view wx:if="{{item.status == 2}}">微信提现</view>
+                        <view>{{item.inputtime}}</view>
                     </view>
                 </view>
-                <view  class="wallright">{{item.price}}</view>
+                <view  class="wallright">
+                    <span wx:if="{{item.status == 1}}">+</span>
+                    <span wx:if="{{item.status == 2}}">-</span>
+                    {{item.money}}
+                </view>
             </view>
+        </view>
+        <view class="readmore" bindtap="loadmore" wx:if="{{!isshowmsg}}">
+            22
+        </view>
+        <view class="nomsg" bindtap="loadmore" wx:if="{{isshowmsg}}">
+            无更多数据!
         </view>
     </view>
 </view>
