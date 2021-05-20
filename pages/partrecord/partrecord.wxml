@@ -3,7 +3,7 @@
     <van-tabs active="{{ active }}" bind:change="onChange" color="#FFCF08" title-active-color="#111111"
         title-inactive-color="#AAAAAA">
         <van-tab title="申请中" custom-class="outbox">
-            <view wx:if="{{!isdatashow}}">
+            <view wx:if="{{isdatashow}}">
                 <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
                     bindtap="recorddetail">
                     <view class="itemtop">
@@ -47,7 +47,7 @@
             </view>
         </van-tab>
         <van-tab title="接单中" custom-class="outbox">
-            <view wx:if="{{!isdatashow}}">
+            <view wx:if="{{isdatashow}}">
                 <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
                     bindtap="recorddetail">
                     <view class="itemtop">
@@ -91,7 +91,7 @@
             </view>
         </van-tab>
         <van-tab title="已结算" custom-class="outbox">
-            <view wx:if="{{!isdatashow}}">
+            <view wx:if="{{isdatashow}}">
                 <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}" data-jobid="{{item.job_id}}"
                     bindtap="recorddetail">
                     <view class="itemtop">
@@ -135,7 +135,7 @@
             </view>
         </van-tab>
         <van-tab title="失败" custom-class="outbox">
-            <view wx:if="{{!isdatashow}}">
+            <view wx:if="{{isdatashow}}">
                 <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
                     bindtap="recorddetail">
                     <view class="itemtop">

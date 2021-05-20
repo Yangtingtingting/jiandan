@@ -382,13 +382,6 @@ Page({
                 duration: 2000
             })
             return;
-        } else if (!_this.data.byphonenumber) {
-            wx.showToast({
-                title: '请填写备用手机号',
-                icon: 'error',
-                duration: 2000
-            })
-            return;
         }else if(_this.data.ishistory){
             console.log(_this.data.sickhis)
             if(!_this.data.sickhis){
@@ -400,6 +393,14 @@ Page({
                 return;
             }
         }
+        // else if (!_this.data.byphonenumber) {
+        //     wx.showToast({
+        //         title: '请填写备用手机号',
+        //         icon: 'error',
+        //         duration: 2000
+        //     })
+        //     return;
+        // }
         saveResume({
             realname: _this.data.name,
             sex: _this.data.sextext,
@@ -719,29 +720,29 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        var _this = this; //必须代码；
-        if (_this.data.isedit) {
-            wx.showModal({
-                title: '提示',
-                content: '是否保存修改信息？',
-                success: function (res) {
-                    if (res.confirm) {
-                        // 调取保存简历
-                        _this.savemsg();
-                        var pages = getCurrentPages(); //当前页面栈
-                        if (pages.length > 0) {
-                            var beforePage = pages[pages.length - 1]; //获取上一个页面实例对象                      
-                            // beforePage.reloadData(); //触发父页面中的方法 
-                            _this.setData({
-                                isedit: false
-                            })
-                        } else if (res.cancel) {
-                            console.log('用户点击取消')
-                        }
-                    }
-                }
-            })
-        };
+        // var _this = this; //必须代码；
+        // if (_this.data.isedit) {
+        //     wx.showModal({
+        //         title: '提示',
+        //         content: '是否保存修改信息？',
+        //         success: function (res) {
+        //             if (res.confirm) {
+        //                 // 调取保存简历
+        //                 _this.savemsg();
+        //                 var pages = getCurrentPages(); //当前页面栈
+        //                 if (pages.length > 0) {
+        //                     var beforePage = pages[pages.length - 1]; //获取上一个页面实例对象                      
+        //                     // beforePage.reloadData(); //触发父页面中的方法 
+        //                     _this.setData({
+        //                         isedit: false
+        //                     })
+        //                 } else if (res.cancel) {
+        //                     console.log('用户点击取消')
+        //                 }
+        //             }
+        //         }
+        //     })
+        // };
     },
 
     /**

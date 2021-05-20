@@ -18,6 +18,10 @@
             <view class="record_soure">
                 兼职编号：{{detaillist.order_num}}
             </view>
+            <view class="record_soure clearb" wx:if="{{detaillist.entrytime}}">
+                <view class="worktime">工作时间：</view>
+                <view class="timedetail">{{detaillist.entrytime}}</view>
+            </view>
             <view class="record_soure" wx:if="{{detaillist.marker}}">
                 失败原因：{{detaillist.marker}}
             </view>

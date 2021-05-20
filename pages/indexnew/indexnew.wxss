@@ -6,31 +6,38 @@ page{
     background: #f5f5f5;
 }
 .navtext {
+    float: left;
     font-size: 28rpx;
     line-height: 88rpx;
     color: #111111;
-    width: 104rpx;
+    width: 102rpx;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    height: 88rpx;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAPBJREFUWEftlNsNwzAIRS8beJN2gyaTp92g3YQNqJBsKYr6gECkfJC/RMEcHx6Ekz90cj4UYLRCZbAMRg1E46sHy2DUQDS+erAMRg1E48092Fp7AhAAMzOzJ3FrrQFYAGjo7In1AN6J6CYiCmqGHHBEdBWRBzNPRwGqBYW8WCE3cC8Ak9e+2aDeuic0QWbAaU4XoBUyC24X4D/ITLjdgN8ge/MvfSB29dx2gNwlXh/woSeRCRcyOEDXkPpNRFLMjfNDBreQ/d29Sn7txRRAz+L1/luAXmOpUxxNbomvElss1RRHLZXBMnikgejZtQejBt9c1I0pcrOKMQAAAABJRU5ErkJggg==");
     background-size: 40rpx;
     background-repeat: no-repeat;
-    background-position: 82rpx 24rpx;
+    background-position: 73rpx 24rpx;
+    /* 
     padding-right: 34rpx;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    height: 88rpx;
+     */
 }
 
 .nacsearch {
     padding: 16rpx 24rpx;
     background: #FFCF08;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
 }
-
+.nacsearch::after{
+    content: "";
+    display: block;
+    clear: both;
+}
 .searchinput {
     width: 80%;
     height: 88rpx;
+    float: right;
 }
 
 .searchinput input {

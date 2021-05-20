@@ -5,12 +5,12 @@ page{
 .navtext {
     font-size: 28rpx;
     line-height: 88rpx;
-    width: 104rpx;
+    width: 102rpx;
     color: #111111;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAPBJREFUWEftlNsNwzAIRS8beJN2gyaTp92g3YQNqJBsKYr6gECkfJC/RMEcHx6Ekz90cj4UYLRCZbAMRg1E46sHy2DUQDS+erAMRg1E48092Fp7AhAAMzOzJ3FrrQFYAGjo7In1AN6J6CYiCmqGHHBEdBWRBzNPRwGqBYW8WCE3cC8Ak9e+2aDeuic0QWbAaU4XoBUyC24X4D/ITLjdgN8ge/MvfSB29dx2gNwlXh/woSeRCRcyOEDXkPpNRFLMjfNDBreQ/d29Sn7txRRAz+L1/luAXmOpUxxNbomvElss1RRHLZXBMnikgejZtQejBt9c1I0pcrOKMQAAAABJRU5ErkJggg==");
     background-size: 40rpx;
     background-repeat: no-repeat;
-    background-position: 82rpx 24rpx;
+    background-position: 73rpx 24rpx;
     padding-right: 34rpx;
     word-break: break-all;
     text-overflow: ellipsis;

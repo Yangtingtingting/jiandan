@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/indexnew/indexnew",
     "pages/mypersonal/mypersonal",
     "pages/concatservice/concatservice",
-    "pages/indexnew/indexnew",
     "pages/my_share/my_share",
     "pages/position_detail/position_detail",
     "pages/partrecord/partrecord",

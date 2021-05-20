@@ -87,3 +87,14 @@ page{
     border-radius: 44rpx;
     box-sizing: border-box;
 }
+.worktime{
+    float: left;
+}
+.timedetail{
+    margin-left: 150rpx;
+}
+.clearb::after{
+    content: "";
+    display: block;
+    clear: both;
+}

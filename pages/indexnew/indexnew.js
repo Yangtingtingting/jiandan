@@ -101,10 +101,11 @@ Page({
                     _this.setData({
                         showsheng:sheng
                     })
-                    wx.setStorageSync('showsheng', sheng);
-                    this.setData({
-                        citys:sheng
+                    _this.setData({
+                        citys:shprovince.slice(0, 3)
                     })
+                    wx.setStorageSync('showsheng', sheng);
+                    
                 } else {
                     _this.setData({
                         citys: province,

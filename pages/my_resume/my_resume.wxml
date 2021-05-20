@@ -43,14 +43,10 @@
                     </view>
                     <van-cell-group>
                         <van-field value="{{ phonenumber }}" label="联系方式" input-align="right" placeholder="请输入手机号码"
-                            border="{{ true }}" custom-style="names" bind:change="phoneChange" label-class="textword"
+                            border="{{ true }}" custom-style="names"  disabled="true" bind:change="phoneChange" label-class="textword"
                             input-class="inputsty" type="number" maxlength="11"/>
                     </van-cell-group>
-                    <van-cell-group>
-                        <van-field value="{{ byphonenumber }}" label="备用联系方式" input-align="right" placeholder="备用联系方式"
-                            border="{{false}}" custom-style="names" bind:change="byphoneChange" label-class="textword"
-                            input-class="inputsty" type="number" maxlength="11"/>
-                    </van-cell-group>
+                    
                 </view>
             </view>
         </view>
@@ -60,6 +56,11 @@
             </view>
             <view>
                 <view>
+                    <van-cell-group>
+                        <van-field value="{{ byphonenumber }}" label="备用联系方式" input-align="right" placeholder="备用联系方式"
+                            border="{{false}}" custom-style="names" bind:change="byphoneChange" label-class="textword"
+                            input-class="inputsty" type="number" maxlength="11"/>
+                    </van-cell-group>
                     <van-cell-group>
                         <van-field value="{{ stature }}" label="身高" input-align="right" placeholder="请输入身高(cm)"
                             border="{{ true }}" custom-style="names" bind:change="statureChange" label-class="textword"

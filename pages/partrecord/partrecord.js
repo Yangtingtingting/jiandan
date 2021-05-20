@@ -13,7 +13,7 @@ Page({
         pagenum: 1,
         listindex:1,
         totalpage:'',
-        isdatashow:false
+        isdatashow:true
     },
     // 获取数据
     getlist: function (listindex,parms,list) {
@@ -27,21 +27,21 @@ Page({
                     totalpage:res.data.totalpage
                 })
                 if(res.data.list.length == 0 && res.data.totalpage == 0){
-                    this.setData({
-                        isdatashow:true
+                    _this.setData({
+                        isdatashow:false
                     })
                 }else if(res.data.totalpage > 1){
-                    this.setData({
+                    _this.setData({
                         showmore:true,
                         nomsg:false
                     })
                 }else if(res.data.totalpage <= 1){
-                    this.setData({
+                    _this.setData({
                         // nomsg:true,
                         showmore:false
                     })
                 }else{
-                    this.setData({
+                    _this.setData({
                         showmore:false,
                         // nomsg:false
                     })
@@ -71,12 +71,12 @@ Page({
     },
     // tab切换
     onChange(event) {
-        let index = (event.detail.index) +1
+        let index = (event.detail.index) + 1;
         this.setData({
             listindex:index,
             pagenum:1,
             totalpage:'',
-            isdatashow:false
+            isdatashow:true
         })
         this.getlist(this.data.listindex,1);
     },
@@ -111,7 +111,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.getlist(this.data.listindex,1)
+        this.getlist(this.data.listindex,1);
     },
 
     /**

@@ -46,7 +46,7 @@
             <view  class="pos_time pb0 bornone">
                 <view class="adresstitle">押金</view>
                 <view class="intro_list bornone">
-                    <view>{{jobdelist.deposit > 0 ? jobdelist.deposit + '元' : '无押金'}}</view>
+                    <view>{{jobdelist.deposit > 0 ? jobdelist.deposit + '元' : '不需要押金'}}</view>
                     <!-- <view wx:for="{{item.pricestructure}}" wx:for-item="itemName" wx:key="index">{{itemName}}</view> -->
                 </view>
             </view>
