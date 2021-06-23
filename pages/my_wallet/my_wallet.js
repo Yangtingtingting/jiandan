@@ -29,7 +29,7 @@ Page({
     // 获取列表数据
     getProfitList:function(){
         let _this = this;
-        console.log(wx.getStorageSync('logindata'))
+        // console.log(wx.getStorageSync('logindata'))
         getfitList({
             page:_this.data.pagenum
         }).then(res => {
@@ -71,6 +71,17 @@ Page({
             this.getProfitList();
         }
     }, 
+    // 提现进度
+    txstatustab: function(){
+        wx.navigateTo({
+            url: '/pages/my_txdetail/my_txdetail',
+            success: (result) => {
+
+            },
+            fail: () => {},
+            complete: () => {}
+        });
+    },
     // 立即提现
     tixian:function(){
         let _this = this;
@@ -78,7 +89,15 @@ Page({
             money:_this.data.refvalue
         }).then(res => {
             if(res.code == 0){
-                console.log(res)
+                _this.setData({
+                    refvalue: '',
+                    btnshow:false
+                });
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 2000
+                })
             }else{
                 _this.setData({
                     refvalue: '',

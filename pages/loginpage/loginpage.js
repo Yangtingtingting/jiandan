@@ -20,7 +20,9 @@ Page({
         // 是否可点击立即报名
         loginbtn: false,
         errophone: false,
-        erromark: false
+        erromark: false,
+        // sence值
+        querydata:''
         // pageBackgroundColor: '#5cb85c'
     },
     // 获取电话号码
@@ -57,7 +59,8 @@ Page({
         }
         login({
             mobile: _this.data.phonenumber,
-            vcode: _this.data.marknumber
+            vcode: _this.data.marknumber,
+            invite:_this.data.querydata
         }).then(res => {
             if (res.code == 0) {
                 // wx.showToast({
@@ -67,10 +70,10 @@ Page({
                 // })
                 wx.setStorageSync('isloginstaus', true);
                 wx.setStorageSync('logindata', res.data);
-                wx.switchTab({
-                    url: '/pages/mypersonal/mypersonal',
+                wx.navigateTo({
+                    url: "/pages/my_resume/my_resume",
                     success: (result) => {
-
+        
                     },
                     fail: () => {},
                     complete: () => {}
@@ -88,13 +91,11 @@ Page({
                 })
             }
         })
-        // console.log(this.data.phonenumber,this.data.marknumber);
-        // // console.log(456)
-        // wx.setStorageSync('logins', 'true');
     },
     // 获取验证码
     vercode: function () {
         let _this = this;
+        console.log(123)
         if (!_this.data.phonenumber || _this.data.phonenumber.length < 11) {
             wx.showToast({
                 title: '请输入正确的手机号码',
@@ -143,9 +144,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options)
-        if(options.scene == ''){
-
+        console.log(options.queryscene)
+        if(options.queryscene){
+            console.log(123,options.queryscene)
+            this.setData({
+                querydata: options.queryscene
+            })
+        }else{
+            this.setData({
+                querydata: ''
+            })
         }
     },
 

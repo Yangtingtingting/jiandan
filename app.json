@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/indexnew/indexnew",
+    "pages/my_wallet/my_wallet",
+    "pages/my_txdetail/my_txdetail",
     "pages/mypersonal/mypersonal",
     "pages/concatservice/concatservice",
     "pages/my_share/my_share",
@@ -8,13 +10,11 @@
     "pages/partrecord/partrecord",
     "pages/partrecord_deatil/partrecord_deatil",
     "pages/salarypage/salarypage",
-    "pages/my_wallet/my_wallet",
     "pages/industrysel/industrysel",
     "pages/salaryselect/salaryselect",
     "pages/regionselect/regionselect",
     "pages/partjob/partjob",
     "pages/sign_success/my_success",
-    "pages/index/index",
     "pages/my_resume/my_resume",
     "pages/loginpage/loginpage",
     "pages/signpage/signpage",

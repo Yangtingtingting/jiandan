@@ -1,0 +1,33 @@
+<!--pages/my_txdetail/my_txdetail.wxml-->
+<view class="box">
+    <view class="walldetalbox">
+        <view class="detaillist">
+            <view>提现金额：</view>
+            <view>￥{{datalist.money}}</view>
+        </view>
+        <view class="detaillist">
+            <view>提现状态：</view>
+            <view wx:if="{{datalist.status == 1}}">申请中</view>
+            <view wx:if="{{datalist.status == 2}}">通过</view>
+            <view wx:if="{{datalist.status == 3}}">失败</view>
+        </view>
+        <view class="detaillist">
+            <view>提现时间：</view>
+            <view>{{datalist.inputtime}}</view>
+        </view>
+        <view class="detaillist" wx:if="{{datalist.checktime}}">
+            <view>审核时间：</view>
+            <view>{{datalist.checktime}}</view>
+        </view>
+        <view class="detaillist" wx:if="{{datalist.remark}}">
+            <view>提现备注：</view>
+            <view>{{datalist.remark}}</view>
+        </view>
+        <view class="detaillist" wx:if="{{datalist.img}}">
+            <view>打款图片：</view>
+            <view class="tximg">
+                <image class="tximg" src="{{datalist.img}}"></image>
+            </view>
+        </view>
+    </view>
+</view>

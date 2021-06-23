@@ -176,6 +176,15 @@ export function getUserQcodePic (data) {
     data 
   })
 }
+// 最新提现进度列表
+// /api/Ucenter/zuixintixian
+export function zuixintixian (data) {
+  return requestFun.request({
+    url:BASE_URL+ '/api/Ucenter/zuixintixian',
+    method: 'get',
+    data 
+  })
+}
 // 获取客服信息
 export function getServiceData (data) {
   return requestFun.request({

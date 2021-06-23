@@ -1,0 +1,20 @@
+/* pages/my_txdetail/my_txdetail.wxss */
+.walldetalbox{
+    width: 670rpx;
+    margin:0 auto;
+}
+.detaillist{
+    display: flex;
+    margin-top: 24rpx;
+    font-size: 32rpx;
+}
+.detaillist view:nth-child(1){
+    color: #999;
+}
+.detaillist view:nth-child(2){
+    color: #333;
+}
+.tximg{
+    width: 280rpx;
+    height: 280rpx;
+}

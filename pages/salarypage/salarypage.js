@@ -33,7 +33,8 @@ Page({
     pagenum:1,
     incometol:'',
     totalpage:'',
-    isshowmsg:false
+    isshowmsg:false,
+    isgift:""
   },
 
   /**
@@ -119,14 +120,16 @@ loadmore: function () {
     let awards = this.data.awardsConfig.awards;
     let awardid = "";
     winresult().then(res => {
-      console.log(res)
       if (res.code == 0) {
         awardid = res.data.id;
+        this.setData({
+            isgift:res.data.status
+        })
         awards.forEach((item, i) => {
             if(item.id == awardid){
-                awrdindex:i
-               console.log(i)
               this.setData({
+                awrdindex:i,
+                isgift:''
              })
             }
         })
@@ -395,6 +398,7 @@ loadmore: function () {
           content: '获得' + (awardsConfig.awards[awardIndex].name),
           showCancel: false
         });
+        this.getProfitList();
         this.setData({
           btnDisabled: ''
         })

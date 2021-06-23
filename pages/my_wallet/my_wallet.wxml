@@ -16,7 +16,10 @@
         </view>
     </view>
     <view class="walletlist">
-        <view class="adresstitle">收入明细</view>
+        <view class="walltheader">
+            <view class="adresstitle">收入明细</view>
+            <view bindtap="txstatustab">提现进度</view>
+        </view>
         <view class="wallitem" wx:for="{{walllist}}" wx:key="index">
             <view class="walletcontent">
                 <view class="wallleft">
@@ -42,7 +45,7 @@
             </view>
         </view>
         <view class="readmore" bindtap="loadmore" wx:if="{{!isshowmsg}}">
-            22
+            下一页
         </view>
         <view class="nomsg" bindtap="loadmore" wx:if="{{isshowmsg}}">
             无更多数据!

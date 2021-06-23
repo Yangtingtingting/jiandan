@@ -3,7 +3,19 @@
 //   checkLogin
 // } from 'api/api'
 App({
-  onLaunch() {
+  onLaunch(options) {
+    if (options.query.scene) {
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '/pages/loginpage/loginpage?queryscene=' + options.query.scene,
+          success: (result) => {
+  
+          },
+          fail: () => {},
+          complete: () => {}
+        });
+      },1)
+    }
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -40,6 +52,6 @@ App({
     //BASE_URL:'https://xcx.yougababy.com' //项目测试地址或项目正式地址
     //BASE_URL:'http://192.168.0.105:8089'
     // BASE_URL:'www.jtegger.com',
-    BASE_URL:'https://www.jtegger.com'
+    BASE_URL: 'https://www.jtegger.com'
   }
 })

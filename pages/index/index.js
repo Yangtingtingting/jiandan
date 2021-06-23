@@ -503,7 +503,8 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad() {
+  onLoad(options) {
+    console.log(123,options,options.scene)
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true

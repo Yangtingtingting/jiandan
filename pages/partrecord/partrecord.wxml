@@ -46,7 +46,7 @@
                 </view>
             </view>
         </van-tab>
-        <van-tab title="接单中" custom-class="outbox">
+        <van-tab title="工作中" custom-class="outbox">
             <view wx:if="{{isdatashow}}">
                 <view class="peritem" wx:for="{{recordlist}}" wx:key="index" data-recordid="{{item.id}}"  data-jobid="{{item.job_id}}"
                     bindtap="recorddetail">

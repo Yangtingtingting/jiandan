@@ -71,7 +71,7 @@
             </view>
             </view>
             <view class="readmore" bindtap="loadmore" wx:if="{{!isshowmsg}}">
-                换一换
+                下一页
             </view>
             <view class="nomsg" bindtap="loadmore" wx:if="{{isshowmsg}}">
                 无更多数据!

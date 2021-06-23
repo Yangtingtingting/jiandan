@@ -147,6 +147,20 @@ page {
     background-repeat: no-repeat;
     background-position:231rpx 41rpx;
 }
+.walltheader{
+    display: flex;
+    justify-content: space-between;
+}
+.walltheader view:nth-child(2){
+    font-size: 28rpx;
+    margin-top: 22rpx;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAOFJREFUWEft1tsNwjAMheG/G7AJjEA3yijeiI5AN2EDkKWKB25S4mOpQs5LX+rq04njZmLna9q5jwJGd6gSrASjCUTrqwcrwWgC0fpwD7bWrsAdmM3sFgW91quAR8ChcqQCeAAWIAUZBvqWtNbSkBJgJlIGzEJKgRlIOVCNTAF+QC5mNo/MyGzgBTgBq5n5s3ulALex88QB59G/jByoxHncUqAaJwVm4GTALJwEmIlTAf2a5TeZNXJav82f8CHZLqz+/eFR8ms4hoHdk7ezoICdgb29XglWgtEEovXVg3+f4APc4WkpGAs7kQAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-size: 44rpx;
+    background-position: right -2rpx;
+    padding-right: 46rpx;
+
+}
 .nomsg{
     color: #999;
     font-size: 24rpx;
