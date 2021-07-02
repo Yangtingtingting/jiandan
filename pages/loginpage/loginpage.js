@@ -15,7 +15,7 @@ Page({
         ismark: '',
         // 是否显示倒计时按钮
         iscountdown: "true",
-        countdowntime: 10,
+        countdowntime: 60,
         mark_inter: '',
         // 是否可点击立即报名
         loginbtn: false,
@@ -144,11 +144,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options.queryscene)
-        if(options.queryscene){
-            console.log(123,options.queryscene)
+        if(options.scene){
             this.setData({
-                querydata: options.queryscene
+                querydata: options.scene
             })
         }else{
             this.setData({

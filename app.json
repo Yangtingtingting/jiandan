@@ -1,11 +1,11 @@
 {
   "pages":[
     "pages/indexnew/indexnew",
+    "pages/my_share/my_share",
     "pages/my_wallet/my_wallet",
     "pages/my_txdetail/my_txdetail",
     "pages/mypersonal/mypersonal",
     "pages/concatservice/concatservice",
-    "pages/my_share/my_share",
     "pages/position_detail/position_detail",
     "pages/partrecord/partrecord",
     "pages/partrecord_deatil/partrecord_deatil",

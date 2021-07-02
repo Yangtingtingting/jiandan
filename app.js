@@ -3,19 +3,23 @@
 //   checkLogin
 // } from 'api/api'
 App({
-  onLaunch(options) {
-    if (options.query.scene) {
-      setTimeout(() => {
-        wx.navigateTo({
-          url: '/pages/loginpage/loginpage?queryscene=' + options.query.scene,
-          success: (result) => {
-  
-          },
-          fail: () => {},
-          complete: () => {}
-        });
-      },1)
-    }
+  onLaunch() {
+    // console.log()
+    // // 判断登录状态
+    // if(!wx.getStorageSync('isloginstaus')){
+    //   if (options.query.scene) {
+    //     setTimeout(() => {
+    //       wx.navigateTo({
+    //         url: '/pages/loginpage/loginpage?queryscene=' + options.query.scene,
+    //         success: (result) => {
+    
+    //         },
+    //         fail: () => {},
+    //         complete: () => {}
+    //       });
+    //     },1)
+    //   }
+    // }
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

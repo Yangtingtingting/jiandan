@@ -4,14 +4,15 @@
         <view class="bgimg">
             <image mode="aspectFill" src="../../images/img_yq.png"></image>
         </view>
-        <view class="sharetitle" bindtap="savecodeimg">
+        <view class="sharetitle">
             <view>您的专属二维码</view>
             <view class="mycode">
-                <image src="http://jtegger.com/public/upload/qcode_3.png"></image>
+                <image src="{{sharesrc}}"></image>
             </view>
             <view class="ysm">邀请码：{{invitexode}}</view>
-            <view>点击保存二维码</view>
+            <view bindtap="downloadimg">点击保存二维码</view>
         </view>
+        <!-- <view>保存二维码给好友扫描注册后即可通过好友工作获得返利</view> -->
     </view>
     <view class="myinvited">
         <view class="inv_title">
@@ -66,7 +67,8 @@
             </view>
     </view>
     <view class="btnshare">
-        <button>分享好友</button>
+        <!-- <button open-type="share" title="分享给好友" hover-class="none">分享好友</button> -->
+        <button bindtap="downloadimg">保存二维码</button>
     </view>
     <view class="sharedia" wx:if="{{shareshow}}" capture-catch:touchmove="preventdefault" bindtap="cancelcon">
         <view class="diaimg">

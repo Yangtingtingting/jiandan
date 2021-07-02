@@ -31,6 +31,7 @@ Page({
     getUserQcodePic: function () {
         getUserQcodePic({}).then(res => {
             if (res.code == 0) {
+                // console.log(res.data.invite_img)
                 this.setData({
                     sharesrc: res.data.invite_img,
                     invitexode: res.data.invite_code
@@ -45,6 +46,7 @@ Page({
         let that = this;
         // let imgsrc = 'https:///www.' + (that.data.sharesrc).slice(7);
         let imgsrc = that.data.sharesrc;
+        // console.log(imgsrc)
         //获取相册授权
         wx.getSetting({
             success(res) {
@@ -73,8 +75,9 @@ Page({
         // }
     },
     // 点击保存图片
-    downloadimg: function (imgSrc){
-        var imgSrc = imgSrc;
+    downloadimg: function (){
+        var imgslice = (this.data.sharesrc).slice(7);
+        var imgSrc = 'https://www.' +imgslice;
         wx.downloadFile({
           url: imgSrc,
           success: function (res) {
@@ -261,7 +264,14 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function (res) {
+        if(res.from == 'button'){
+            // console.log(res.target,res)
+        }
+        return{
+            title:'煎蛋小程序',
+            path:'pages/indexnew/indexnew',
+            imageUrl:'../../images/imgshare.png'
+        }
     }
 })

@@ -47,6 +47,6 @@
         </view>
     </view>
     <view class="copyright">
-        <view>version:0.1.0</view>
+        <view>version:0.1.8</view>
     </view>
 </view>

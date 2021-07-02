@@ -2,22 +2,22 @@
 import {
     getfitList,
     tixian
-  } from '../../api/api'
+} from '../../api/api'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        incometol:'',
-        iserrowprd:false,
-        btnshow:false,
+        incometol: '',
+        iserrowprd: false,
+        btnshow: false,
         // 体现金额
-        refvalue:'',
-        walllist:[],
+        refvalue: '',
+        walllist: [],
         pagenum: 1,
-        totalpage:'',
-        isshowmsg:false
+        totalpage: '',
+        isshowmsg: false
     },
 
     /**
@@ -27,25 +27,25 @@ Page({
 
     },
     // 获取列表数据
-    getProfitList:function(){
+    getProfitList: function () {
         let _this = this;
         // console.log(wx.getStorageSync('logindata'))
         getfitList({
-            page:_this.data.pagenum
+            page: _this.data.pagenum
         }).then(res => {
-            if(res.code == 0){
-                if(res.data.totalpage < 1){
+            if (res.code == 0) {
+                if (res.data.totalpage < 1) {
                     _this.setData({
-                        isshowmsg:true
-                      })
-                }else{
+                        isshowmsg: true
+                    })
+                } else {
                     _this.setData({
-                        walllist:res.data.list,
-                        incometol:res.data.money,
-                        totalpage:res.data.totalpage
+                        walllist: res.data.list,
+                        incometol: res.data.money,
+                        totalpage: res.data.totalpage
                     })
                 }
-            }else{
+            } else {
                 wx.showToast({
                     title: res.msg,
                     icon: 'none',
@@ -70,9 +70,9 @@ Page({
             });
             this.getProfitList();
         }
-    }, 
+    },
     // 提现进度
-    txstatustab: function(){
+    txstatustab: function () {
         wx.navigateTo({
             url: '/pages/my_txdetail/my_txdetail',
             success: (result) => {
@@ -83,25 +83,25 @@ Page({
         });
     },
     // 立即提现
-    tixian:function(){
+    tixian: function () {
         let _this = this;
         tixian({
-            money:_this.data.refvalue
+            money: _this.data.refvalue
         }).then(res => {
-            if(res.code == 0){
+            if (res.code == 0) {
                 _this.setData({
                     refvalue: '',
-                    btnshow:false
+                    btnshow: false
                 });
                 wx.showToast({
                     title: res.msg,
                     icon: 'none',
                     duration: 2000
                 })
-            }else{
+            } else {
                 _this.setData({
                     refvalue: '',
-                    btnshow:false
+                    btnshow: false
                 });
                 wx.showToast({
                     title: res.msg,
@@ -111,17 +111,24 @@ Page({
             }
         })
     },
-    txprice:function(e){
+    txprice: function (e) {
+        var money;
+        if (/^(\d?)+(\.\d{0,2})?$/.test(e.detail.value)) { //正则验证，提现金额小数点后不能大于两位数字
+            money = e.detail.value;
+        } else {
+            money = e.detail.value.substring(0, e.detail.value.length - 1);
+        }
         this.setData({
-            refvalue: e.detail.value
+            refvalue: money
         });
-        if(this.data.refvalue.length > 0){
+        // console.log(this.data.refvalue)
+        if (this.data.refvalue.length > 0) {
             this.setData({
-                btnshow:true
+                btnshow: true
             });
-        }else{
+        } else {
             this.setData({
-                btnshow:false
+                btnshow: false
             });
         }
     },
